@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>당원주권을 위한 1인1표시대</title>
+    <meta name="description" content="더불어민주당 당원 1인1표제를 당헌에 명시하여 진정한 당원 중심 정당을 만들기 위한 운동">
+    <meta property="og:title" content="당원주권을 위한 1인1표시대">
+    <meta property="og:description" content="당의 주인은 당원입니다. 1인1표제를 불가역적으로 제도화합시다.">
+    <style>
+        :root {
+            --blue: #004EA2;
+            --blue-dark: #003278;
+            --blue-mid: #1565C0;
+            --green: #007A3D;
+            --green-light: #009A4E;
+            --bg-light: #EEF4FF;
+            --text-dark: #111827;
+            --text-gray: #4B5563;
+            --white: #FFFFFF;
+            --border: #E5EAF3;
+            --kakao: #FEE500;
+            --kakao-text: #3C1E1E;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* ─── HEADER ─── */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 62px;
+            background: rgba(0, 50, 120, 0.97);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.25);
+        }
+
+        .nav-wrap {
+            max-width: 1180px;
+            margin: 0 auto;
+            height: 100%;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.05rem;
+            font-weight: 900;
+            letter-spacing: -0.3px;
+            line-height: 1.3;
+            text-decoration: none;
+        }
+
+        .logo em {
+            color: #7ECCEF;
+            font-style: normal;
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 500;
+            opacity: 0.85;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links a.nav-link {
+            color: rgba(255,255,255,0.82);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a.nav-link:hover { color: white; }
+
+        .kakao-btn {
+            background: var(--kakao);
+            color: var(--kakao-text);
+            padding: 9px 18px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 0.83rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            white-space: nowrap;
+            border: none;
+            cursor: pointer;
+        }
+
+        .kakao-btn:hover {
+            filter: brightness(1.05);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+        }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 6px;
+        }
+        .hamburger span { width: 22px; height: 2px; background: white; display: block; border-radius: 2px; }
+
+        /* Mobile nav */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 62px;
+            left: 0;
+            right: 0;
+            background: var(--blue-dark);
+            padding: 12px 20px 20px;
+            z-index: 999;
+            flex-direction: column;
+            gap: 4px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+        .mobile-nav.open { display: flex; }
+        .mobile-nav a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            font-size: 0.95rem;
+            padding: 11px 4px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .mobile-nav a:last-child { border-bottom: none; }
+
+        /* ─── HERO ─── */
+        #hero {
+            min-height: 100vh;
+            padding-top: 62px;
+            background: linear-gradient(150deg, #002060 0%, #004EA2 45%, #005F30 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -15%;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(0,154,78,0.12) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        #hero::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(126,204,239,0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 80px 20px 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(126,204,239,0.3);
+            color: #7ECCEF;
+            padding: 7px 18px;
+            border-radius: 30px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            margin-bottom: 28px;
+        }
+
+        .hero-title {
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            font-weight: 900;
+            color: white;
+            line-height: 1.15;
+            letter-spacing: -1.5px;
+            margin-bottom: 24px;
+        }
+
+        .hero-title .hl { color: #7ECCEF; }
+        .hero-title .hl2 { color: #63E6A0; }
+
+        .hero-sub {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: rgba(255,255,255,0.82);
+            max-width: 600px;
+            line-height: 1.75;
+            margin-bottom: 40px;
+        }
+
+        .hero-sub strong { color: white; font-weight: 700; }
+
+        .hero-cta {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 64px;
+        }
+
+        .btn-kakao {
+            background: var(--kakao);
+            color: var(--kakao-text);
+            padding: 15px 34px;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.25s;
+        }
+
+        .btn-kakao:hover {
+            filter: brightness(1.05);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(254,229,0,0.35);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            padding: 15px 34px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            border: 2px solid rgba(255,255,255,0.45);
+            transition: all 0.25s;
+        }
+
+        .btn-outline:hover {
+            border-color: white;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+            flex-wrap: wrap;
+        }
+
+        .stat-box { text-align: left; }
+
+        .stat-num {
+            display: block;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            color: white;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .stat-num.green { color: #63E6A0; }
+
+        .stat-lbl {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.65);
+            font-weight: 400;
+        }
+
+        /* ─── SECTION COMMONS ─── */
+        .section {
+            padding: 88px 20px;
+        }
+
+        .section.bg-light { background: #F2F6FF; }
+        .section.bg-white { background: white; }
+        .section.bg-gray { background: #F8F9FB; }
+
+        .sec-wrap {
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
+        .sec-head {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .sec-badge {
+            display: inline-block;
+            background: var(--bg-light);
+            color: var(--blue);
+            padding: 5px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        .sec-title {
+            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+            font-weight: 900;
+            color: var(--text-dark);
+            letter-spacing: -0.8px;
+            line-height: 1.25;
+        }
+
+        .sec-desc {
+            margin-top: 12px;
+            color: var(--text-gray);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* ─── ABOUT ─── */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .about-left h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--blue);
+            margin-bottom: 18px;
+        }
+
+        .about-left p {
+            color: var(--text-gray);
+            font-size: 1rem;
+            line-height: 1.85;
+            margin-bottom: 18px;
+        }
+
+        .about-left p strong { color: var(--text-dark); }
+
+        .about-right {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .about-card {
+            background: white;
+            border-radius: 14px;
+            padding: 22px 24px;
+            border-left: 5px solid var(--green);
+            box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+        }
+
+        .about-card h4 {
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+
+        .about-card p {
+            font-size: 0.88rem;
+            color: var(--text-gray);
+            line-height: 1.65;
+        }
+
+        .about-card p strong { color: var(--blue); }
+
+        /* ─── POLICIES ─── */
+        .policy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .policy-card {
+            background: white;
+            border-radius: 16px;
+            padding: 28px 22px;
+            border: 2px solid transparent;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+
+        .policy-card:hover {
+            border-color: var(--blue);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 36px rgba(0,78,162,0.13);
+        }
+
+        .policy-card.star {
+            background: linear-gradient(140deg, var(--blue), var(--blue-mid));
+            color: white;
+            border: none;
+            grid-column: span 1;
+        }
+
+        .policy-icon {
+            font-size: 2rem;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .policy-tag {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 20px;
+            background: #E8F5E9;
+            color: var(--green);
+            margin-bottom: 14px;
+        }
+
+        .policy-card.star .policy-tag {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .policy-card h3 {
+            font-size: 1rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .policy-card.star h3 { color: white; }
+
+        .policy-card p {
+            font-size: 0.87rem;
+            color: var(--text-gray);
+            line-height: 1.65;
+        }
+
+        .policy-card.star p { color: rgba(255,255,255,0.85); }
+
+        /* ─── MEMBERS ─── */
+        .cat-wrap { margin-bottom: 64px; }
+
+        .cat-head {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 28px;
+            padding-bottom: 16px;
+            border-bottom: 3px solid var(--blue);
+        }
+
+        .cat-head h3 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--blue);
+        }
+
+        .cat-cnt {
+            background: var(--blue);
+            color: white;
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 3px 12px;
+            border-radius: 20px;
+        }
+
+        .member-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 20px;
+        }
+
+        .m-card {
+            background: white;
+            border-radius: 16px;
+            padding: 26px 18px 20px;
+            text-align: center;
+            box-shadow: 0 3px 18px rgba(0,0,0,0.07);
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .m-card:hover {
+            border-color: var(--blue);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0,78,162,0.13);
+        }
+
+        .m-card.tbd {
+            background: #F8F9FA;
+            border: 2px dashed #CDD2DA;
+        }
+
+        .avatar {
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            margin: 0 auto 14px;
+            background: linear-gradient(135deg, var(--blue), var(--green));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: white;
+            overflow: hidden;
+        }
+
+        .tbd .avatar { background: #C8D0DB; }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .m-name {
+            font-size: 1.08rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 3px;
+        }
+
+        .tbd .m-name { color: #9CA3AF; }
+
+        .m-district {
+            font-size: 0.82rem;
+            color: var(--text-gray);
+            margin-bottom: 6px;
+        }
+
+        .m-term {
+            display: inline-block;
+            background: var(--bg-light);
+            color: var(--blue);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 3px 11px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+
+        .m-speeches {
+            font-size: 0.82rem;
+            color: var(--green);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .m-speeches.pending { color: #9CA3AF; }
+
+        .speech-btn {
+            background: var(--bg-light);
+            color: var(--blue);
+            border: none;
+            padding: 7px 16px;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+            text-align: center;
+        }
+
+        .speech-btn:hover {
+            background: var(--blue);
+            color: white;
+        }
+
+        .speech-list {
+            display: none;
+            text-align: left;
+            margin-top: 12px;
+            background: #F3F7FF;
+            border-radius: 10px;
+            padding: 14px;
+        }
+
+        .speech-list.open { display: block; }
+
+        .sp-item {
+            font-size: 0.78rem;
+            color: var(--text-gray);
+            padding: 8px 0;
+            border-bottom: 1px solid #DDE4EF;
+            line-height: 1.5;
+        }
+
+        .sp-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+        .sp-item a {
+            display: block;
+            margin-top: 4px;
+            color: var(--blue);
+            font-weight: 600;
+            font-size: 0.74rem;
+            text-decoration: none;
+        }
+
+        .sp-item a:hover { text-decoration: underline; }
+
+        /* ─── NEWS ─── */
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .news-item {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            background: white;
+            border-radius: 12px;
+            padding: 18px 22px;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 2px 14px rgba(0,0,0,0.05);
+            transition: all 0.2s;
+            border-left: 4px solid transparent;
+        }
+
+        .news-item:hover {
+            border-left-color: var(--blue);
+            transform: translateX(4px);
+            box-shadow: 0 4px 22px rgba(0,78,162,0.1);
+        }
+
+        .news-src {
+            background: var(--bg-light);
+            color: var(--blue);
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 5px 10px;
+            border-radius: 6px;
+            min-width: 76px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .news-body { flex: 1; }
+
+        .news-body h4 {
+            font-size: 0.93rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.45;
+            margin-bottom: 3px;
+        }
+
+        .news-date { font-size: 0.78rem; color: #9CA3AF; }
+
+        .news-arrow {
+            color: var(--blue);
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        /* ─── JOIN ─── */
+        #join {
+            background: linear-gradient(150deg, #002060 0%, var(--blue) 50%, #005030 100%);
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        #join h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 900;
+            color: white;
+            margin-bottom: 18px;
+            letter-spacing: -1px;
+        }
+
+        #join .join-sub {
+            color: rgba(255,255,255,0.82);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 44px;
+        }
+
+        .join-box {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 14px;
+            padding: 24px 32px;
+            max-width: 580px;
+            margin: 0 auto 44px;
+            text-align: left;
+        }
+
+        .join-box h4 {
+            color: var(--kakao);
+            font-size: 0.88rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .join-box ol {
+            color: rgba(255,255,255,0.82);
+            font-size: 0.9rem;
+            line-height: 2.1;
+            padding-left: 20px;
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            background: #0F172A;
+            color: rgba(255,255,255,0.5);
+            padding: 44px 20px;
+            text-align: center;
+        }
+
+        .footer-name {
+            font-size: 1rem;
+            font-weight: 800;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 10px;
+        }
+
+        footer p { font-size: 0.82rem; line-height: 2; }
+
+        footer a { color: rgba(126,204,239,0.8); text-decoration: none; }
+        footer a:hover { color: #7ECCEF; }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 900px) {
+            .policy-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .policy-grid { grid-template-columns: 1fr; }
+            .hero-stats { gap: 28px; }
+            .section { padding: 60px 16px; }
+            .join-box { padding: 20px 20px; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-cta { flex-direction: column; }
+            .btn-kakao, .btn-outline { width: 100%; justify-content: center; }
+            .member-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* ─── SCROLL ANIMATION ─── */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(22px);
+            transition: opacity 0.55s ease, transform 0.55s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header>
+    <div class="nav-wrap">
+        <a href="#" class="logo">
+            당원주권을 위한 1인1표시대
+            <em>더불어민주당 당원주권 강화 운동</em>
+        </a>
+        <nav class="nav-links">
+            <a href="#about" class="nav-link">운동 소개</a>
+            <a href="#policies" class="nav-link">핵심 정책</a>
+            <a href="#members" class="nav-link">지지 의원</a>
+            <a href="#news" class="nav-link">찬성 발언</a>
+            <a href="https://invite.kakao.com/tc/oxjCPbgcmC" class="kakao-btn" target="_blank" rel="noopener">
+                💬 카카오톡 참여하기
+            </a>
+        </nav>
+        <button class="hamburger" onclick="toggleMenu()" aria-label="메뉴 열기">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</header>
+
+<!-- 모바일 메뉴 -->
+<nav class="mobile-nav" id="mobileNav">
+    <a href="#about" onclick="closeMenu()">운동 소개</a>
+    <a href="#policies" onclick="closeMenu()">핵심 정책</a>
+    <a href="#members" onclick="closeMenu()">지지 의원</a>
+    <a href="#news" onclick="closeMenu()">찬성 발언</a>
+    <a href="https://invite.kakao.com/tc/oxjCPbgcmC" class="kakao-btn" target="_blank" rel="noopener" style="margin-top:8px;justify-content:center;">💬 카카오톡 참여하기</a>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+    <div class="hero-inner">
+        <div class="hero-badge">✊ 더불어민주당 당원주권 강화 운동</div>
+        <h1 class="hero-title">
+            당의 주인은<br>
+            <span class="hl">당원</span>입니다
+        </h1>
+        <p class="hero-sub">
+            매달 당비를 내며 민주당을 지탱하는 권리당원의 한 표가<br>
+            대의원의 한 표와 <strong>같은 가치</strong>를 가져야 합니다.<br>
+            <strong>1인 1표, 지금이 바로 그 시대입니다.</strong>
+        </p>
+        <div class="hero-cta">
+            <a href="https://invite.kakao.com/tc/oxjCPbgcmC" class="btn-kakao" target="_blank" rel="noopener">
+                💬 지금 바로 참여하기
+            </a>
+            <a href="#about" class="btn-outline">운동 소개 보기</a>
+        </div>
+        <div class="hero-stats">
+            <div class="stat-box">
+                <span class="stat-num green">85.3%</span>
+                <span class="stat-lbl">권리당원 1인1표 찬성률</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-num">4명</span>
+                <span class="stat-lbl">당대표 후보 참여</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-num">200만+</span>
+                <span class="stat-lbl">더불어민주당 권리당원</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about" class="section bg-light">
+    <div class="sec-wrap">
+        <div class="sec-head">
+            <div class="sec-badge">📌 운동 소개</div>
+            <h2 class="sec-title">당원주권시대란 무엇인가</h2>
+            <p class="sec-desc">더불어민주당 권리당원들이 만들어가는 진정한 당원 중심 정당 운동</p>
+        </div>
+
+        <div class="about-grid">
+            <div class="about-left fade-in">
+                <h3>🎯 우리가 이 운동을 시작한 이유</h3>
+                <p>
+                    더불어민주당에는 현재 <strong>200만 명 이상의 권리당원</strong>이 있습니다. 이들은 매달 당비를 납부하며 당을 지켜왔지만, 당대표·최고위원을 선출하는 전당대회에서 대의원 한 명보다 훨씬 작은 표의 가치를 가졌습니다.
+                </p>
+                <p>
+                    나라의 주인이 국민이듯, <strong>당의 주인은 당원</strong>입니다. 당원 1인1표제는 모든 권리당원이 동등한 한 표를 행사하는 가장 기본적인 <strong>민주주의 원칙</strong>입니다.
+                </p>
+                <p>
+                    2026년 1월 실시된 권리당원 의견수렴에서 무려 <strong>85.3%가 찬성</strong>했습니다. 이미 시대의 흐름은 정해졌습니다. 우리는 이 변화를 불가역적으로, 영구적으로 제도화하기 위해 뭉쳤습니다.
+                </p>
+                <p>
+                    당원주권시대는 정치 명망가나 계파가 아닌, <strong>진짜 당원이 중심</strong>이 되는 운동입니다. 당신의 참여가 민주주의의 역사를 바꿉니다.
+                </p>
+            </div>
+
+            <div class="about-right">
+                <div class="about-card fade-in">
+                    <h4>🗳️ 왜 1인1표인가?</h4>
+                    <p>현행 제도에서 대의원 한 명의 표는 수십 명 권리당원의 표를 합친 것과 같습니다. 보통·평등선거라는 <strong>민주주의의 기본 원칙</strong>을 당 안에서도 실현해야 합니다.</p>
+                </div>
+                <div class="about-card fade-in">
+                    <h4>🔒 불가역적 제도화가 필요한 이유</h4>
+                    <p>지도부가 바뀔 때마다 흔들리는 제도가 아니라, 당헌에 명시하여 어떤 세력도 되돌릴 수 없는 <strong>영구적인 당원 권리</strong>로 만들어야 합니다.</p>
+                </div>
+                <div class="about-card fade-in">
+                    <h4>🌊 이미 대세가 된 당원주권</h4>
+                    <p>권리당원 85.3% 찬성, 당대표 후보들의 공약 채택, 전국적인 당원 공감대. 지금 이 운동에 함께하는 것은 <strong>대세의 흐름</strong>에 올라타는 것입니다.</p>
+                </div>
+                <div class="about-card fade-in">
+                    <h4>🤝 고양에서 시작하는 전국 운동</h4>
+                    <p>고양에서 출발하여 전국으로 확산됩니다. 지역 당원이 주도하는 <strong>풀뿌리 민주주의</strong> 운동으로, 명망가가 아닌 진짜 당원이 중심입니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ POLICIES ═══ -->
+<section id="policies" class="section bg-white">
+    <div class="sec-wrap">
+        <div class="sec-head">
+            <div class="sec-badge">📋 핵심 정책</div>
+            <h2 class="sec-title">우리가 요구하는 변화</h2>
+            <p class="sec-desc">당원주권시대가 추진하는 6가지 핵심 정책</p>
+        </div>
+
+        <div class="policy-grid">
+            <div class="policy-card star fade-in">
+                <span class="policy-icon">⭐</span>
+                <div class="policy-tag">최우선 과제</div>
+                <h3>당원 1인1표제 당헌 명시</h3>
+                <p>1인1표제를 당헌에 불가역적으로 명시합니다. 어떤 지도부가 와도 되돌릴 수 없는 영구적 당원 권리로 확립합니다.</p>
+            </div>
+            <div class="policy-card fade-in">
+                <span class="policy-icon">🗳️</span>
+                <div class="policy-tag">핵심 과제</div>
+                <h3>시도당위원장 1인1표 선출</h3>
+                <p>전국 시도당위원장 선출도 권리당원의 1인1표 방식으로 전환하여 지역 당원의 권리를 완전히 보장합니다.</p>
+            </div>
+            <div class="policy-card fade-in">
+                <span class="policy-icon">🔓</span>
+                <div class="policy-tag">핵심 과제</div>
+                <h3>열린 공천 및 경선 활성화</h3>
+                <p>총선·지선에서 전략공천·단수공천을 지양하고, 당원이 참여하는 공정한 경선 문화를 정착시킵니다.</p>
+            </div>
+            <div class="policy-card fade-in">
+                <span class="policy-icon">📱</span>
+                <h3>카카오 투표 확대</h3>
+                <p>경선 및 중요 결정에서 카카오 투표를 확대하여 더 많은 당원이 쉽고 편리하게 민주적 의사결정에 참여합니다.</p>
+            </div>
+            <div class="policy-card fade-in">
+                <span class="policy-icon">💬</span>
+                <h3>당원 제안 제도 확대</h3>
+                <p>당원이 정책을 직접 제안하고 반영할 수 있는 공식 채널을 강화하여 아래로부터의 민주주의를 실현합니다.</p>
+            </div>
+            <div class="policy-card fade-in">
+                <span class="policy-icon">🏛️</span>
+                <h3>전당원 투표 확대</h3>
+                <p>당의 중요 결정에 전 당원이 직접 투표로 참여하는 제도를 도입하고 활성화하여 진정한 당원 자치를 실현합니다.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ MEMBERS ═══ -->
+<section id="members" class="section bg-gray">
+    <div class="sec-wrap">
+        <div class="sec-head">
+            <div class="sec-badge">👥 지지 국회의원</div>
+            <h2 class="sec-title">1인1표 찬성 국회의원</h2>
+            <p class="sec-desc">당원주권 1인1표를 지지하는 국회의원들이 함께합니다. 더 많은 의원들이 함께하고 있습니다.</p>
+        </div>
+
+        <!-- 당대표 후보 -->
+        <div class="cat-wrap">
+            <div class="cat-head">
+                <h3>🏆 당대표 후보</h3>
+                <span class="cat-cnt">4명</span>
+            </div>
+            <div class="member-grid">
+                <div class="m-card fade-in">
+                    <div class="avatar">청</div>
+                    <div class="m-name">정청래</div>
+                    <div class="m-district">서울 마포을</div>
+                    <div class="m-term">4선 · 현 당대표</div>
+                    <div class="m-speeches">💬 찬성 발언 5건 확인</div>
+                    <button class="speech-btn" onclick="toggleSpeech(this)">발언 보기 ▼</button>
+                    <div class="speech-list">
+                        <div class="sp-item">
+                            "당원 1표제로 이재명 정부 성공시키겠다"
+                            <a href="https://www.fnnews.com/news/202606171014434974" target="_blank" rel="noopener">파이낸셜뉴스 2026.06.17 →</a>
+                        </div>
+                        <div class="sp-item">
+                            "당의 주인은 당원" — 1인1표제 앞세워 연임 출사표
+                            <a href="https://www.hankookilbo.com/news/article/A2026061609120004914" target="_blank" rel="noopener">한국일보 2026.06.16 →</a>
+                        </div>
+                        <div class="sp-item">
+                            "1인1표는 민주주의 그 자체, 반드시 지켜져야"
+                            <a href="https://www.thepublic.kr/news/articleView.html?idxno=307511" target="_blank" rel="noopener">더퍼블릭 2026 →</a>
+                        </div>
+                        <div class="sp-item">
+                            "1인1표는 민주주의 원칙" — 전당대회 체제 돌입
+                            <a href="https://edaily.co.kr/News/Read?mediaCodeNo=257&newsId=04172166645482376" target="_blank" rel="noopener">이데일리 2026 →</a>
+                        </div>
+                        <div class="sp-item">
+                            "1인1표 위해 수많은 피 흘려…당 주인은 당원"
+                            <a href="http://www.newstomato.com/ReadNews.aspx?no=1304109" target="_blank" rel="noopener">뉴스토마토 2025 →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="m-card fade-in">
+                    <div class="avatar">민</div>
+                    <div class="m-name">김민석</div>
+                    <div class="m-district">서울 영등포을</div>
+                    <div class="m-term">5선 · 전 국무총리</div>
+                    <div class="m-speeches pending">🔍 발언 취합 중</div>
+                    <button class="speech-btn" onclick="toggleSpeech(this)">발언 보기 ▼</button>
+                    <div class="speech-list">
+                        <div class="sp-item">발언 확인 중입니다. 곧 업데이트됩니다.</div>
+                    </div>
+                </div>
+
+                <div class="m-card fade-in">
+                    <div class="avatar">영</div>
+                    <div class="m-name">송영길</div>
+                    <div class="m-district">인천 연수갑</div>
+                    <div class="m-term">6선</div>
+                    <div class="m-speeches pending">🔍 발언 취합 중</div>
+                    <button class="speech-btn" onclick="toggleSpeech(this)">발언 보기 ▼</button>
+                    <div class="speech-list">
+                        <div class="sp-item">발언 확인 중입니다. 곧 업데이트됩니다.</div>
+                    </div>
+                </div>
+
+                <div class="m-card fade-in">
+                    <div class="avatar">용</div>
+                    <div class="m-name">김용민</div>
+                    <div class="m-district">서울 노원병</div>
+                    <div class="m-term">2선</div>
+                    <div class="m-speeches pending">🔍 발언 취합 중</div>
+                    <button class="speech-btn" onclick="toggleSpeech(this)">발언 보기 ▼</button>
+                    <div class="speech-list">
+                        <div class="sp-item">발언 확인 중입니다. 곧 업데이트됩니다.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 최고위원 후보 -->
+        <div class="cat-wrap">
+            <div class="cat-head">
+                <h3>⭐ 최고위원 후보</h3>
+                <span class="cat-cnt">확정 후 업데이트</span>
+            </div>
+            <div class="member-grid">
+                <div class="m-card tbd fade-in">
+                    <div class="avatar" style="background:#C8D0DB;">?</div>
+                    <div class="m-name">후보 확정 후</div>
+                    <div class="m-district">업데이트 예정</div>
+                </div>
+                <div class="m-card tbd fade-in">
+                    <div class="avatar" style="background:#C8D0DB;">?</div>
+                    <div class="m-name">후보 확정 후</div>
+                    <div class="m-district">업데이트 예정</div>
+                </div>
+                <div class="m-card tbd fade-in">
+                    <div class="avatar" style="background:#C8D0DB;">?</div>
+                    <div class="m-name">후보 확정 후</div>
+                    <div class="m-district">업데이트 예정</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 일반 의원 (가나다순) -->
+        <div class="cat-wrap">
+            <div class="cat-head">
+                <h3>🧑‍💼 일반 의원</h3>
+                <span class="cat-cnt">확인 2명 (업데이트 중)</span>
+            </div>
+            <div class="member-grid">
+                <!-- 문정복 -->
+                <div class="m-card fade-in">
+                    <div class="avatar">정</div>
+                    <div class="m-name">문정복</div>
+                    <div class="m-district">경기 시흥갑</div>
+                    <div class="m-term">재선 · 현 최고위원</div>
+                    <div class="m-speeches">💬 찬성 발언 1건 확인</div>
+                    <button class="speech-btn" onclick="toggleSpeech(this)">발언 보기 ▼</button>
+                    <div class="speech-list">
+                        <div class="sp-item">
+                            "당원주권 시대 열렸다" — 1인1표제 통과 환영 성명
+                            <a href="https://www.news1.kr/politics/assembly/6061041" target="_blank" rel="noopener">뉴스1 2026 →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 이성윤 -->
+                <div class="m-card fade-in">
+                    <div class="avatar">성</div>
+                    <div class="m-name">이성윤</div>
+                    <div class="m-district">인천 계양을</div>
+                    <div class="m-term">초선 · 현 최고위원</div>
+                    <div class="m-speeches">💬 찬성 발언 2건 확인</div>
+                    <button class="speech-btn" onclick="toggleSpeech(this)">발언 보기 ▼</button>
+                    <div class="speech-list">
+                        <div class="sp-item">
+                            "1인1표제는 헌법의 민주주의 원리를 당 안에서도 실현하자는 것"
+                            <a href="https://www.huffingtonpost.kr/article/257883" target="_blank" rel="noopener">허프포스트 2025 →</a>
+                        </div>
+                        <div class="sp-item">
+                            "더 민주적인 정당으로 나아가기 위해 1인 1표 체제를 정착시켜야 한다"
+                            <a href="https://www.kado.net/news/articleView.html?idxno=2026408" target="_blank" rel="noopener">강원도민일보 2026 →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ NEWS ═══ -->
+<section id="news" class="section bg-light">
+    <div class="sec-wrap">
+        <div class="sec-head">
+            <div class="sec-badge">📰 찬성 발언 뉴스</div>
+            <h2 class="sec-title">1인1표 찬성 발언 언론 보도</h2>
+            <p class="sec-desc">2020년 이후 주요 국회의원의 1인1표 찬성 발언 언론 기사 (최신순)</p>
+        </div>
+
+        <div class="news-list">
+            <a class="news-item fade-in" href="https://www.fnnews.com/news/202606171014434974" target="_blank" rel="noopener">
+                <div class="news-src">파이낸셜뉴스</div>
+                <div class="news-body">
+                    <h4>정청래 "친청파·친석파 악의적 갈라치기…당원 1표제로 李정부 성공"</h4>
+                    <div class="news-date">2026.06.17 · 정청래</div>
+                </div>
+                <div class="news-arrow">→</div>
+            </a>
+
+            <a class="news-item fade-in" href="https://www.hankookilbo.com/news/article/A2026061609120004914" target="_blank" rel="noopener">
+                <div class="news-src">한국일보</div>
+                <div class="news-body">
+                    <h4>"당의 주인은 당원"··· 정청래, 1인 1표제 앞세워 연임 출사표</h4>
+                    <div class="news-date">2026.06.16 · 정청래</div>
+                </div>
+                <div class="news-arrow">→</div>
+            </a>
+
+            <a class="news-item fade-in" href="https://www.sisajournal.com/news/articleView.html?idxno=376583" target="_blank" rel="noopener">
+                <div class="news-src">시사저널</div>
+                <div class="news-body">
+                    <h4>정청래 "당 운영은 결국 당원이 하는 것"…1인1표제 재강조</h4>
+                    <div class="news-date">2026.06 · 정청래</div>
+                </div>
+                <div class="news-arrow">→</div>
+            </a>
+
+            <a class="news-item fade-in" href="https://www.kado.net/news/articleView.html?idxno=2026408" target="_blank" rel="noopener">
+                <div class="news-src">강원도민일보</div>
+                <div class="news-body">
+                    <h4>민주당 최고위원 보선 토론회…'1인1표'엔 공감, 당청 관계엔 온도차 (이성윤 발언)</h4>
+                    <div class="news-date">2026 · 이성윤</div>
+                </div>
+                <div class="news-arrow">→</div>
+            </a>
+
+            <a class="news-item fade-in" href="https://www.khan.co.kr/article/202601241902001" target="_blank" rel="noopener">
+                <div class="news-src">경향신문</div>
+                <div class="news-body">
+                    <h4>정청래표 '1인 1표제', 민주당 권리당원 찬성률 85.3%</h4>
+                    <div class="news-date">2026.01.24 · 정청래</div>
+                </div>
+                <div class="news-arrow">→</div>
+            </a>
+
+            <a class="news-item fade-in" href="https://www.hankookilbo.com/news/article/amp/A2026012313510002425" target="_blank" rel="noopener">
+                <div class="news-src">한국일보</div>
+                <div class="news-body">
+                    <h4>민주당 '1인 1표제' 권리당원 85% 찬성… 정청래 "압도적 다수 뜻 확인"</h4>
+                    <div class="news-date">2026.01.23 · 정청래</div>
+                </div>
+                <div class="news-arrow">→</div>
+            </a>
+
+            <a class="news-item fade-in" href="https://www.news1.kr/politics/assembly/6061041" target="_blank" rel="noopener">
+                <div class="news-src">뉴스1</div>
+                <div class="news-body">
+                    <h4>1인1표제 통과에 친청계 "환영"…문정복·이성윤·박수현 "당원주권 시대 열렸다"</h4>
+                    <div class="news-date">2026 · 문정복·이성윤·박수현</div>
+                </div>
+                <div class="news-arrow">→</div>
+            </a>
+
+            <a class="news-item fade-in" href="https://www.huffingtonpost.kr/article/257883" target="_blank" rel="noopener">
+                <div class="news-src">허프포스트</div>
+                <div class="news-body">
+                    <h4>'1인1표제'가 민주당의 새로운 전선으로 — 이성윤 "당원 주권 원리를 당 안에서 실현"</h4>
+                    <div class="news-date">2025 · 이성윤</div>
+                </div>
+                <div class="news-arrow">→</div>
+            </a>
+
+            <a class="news-item fade-in" href="http://www.newstomato.com/ReadNews.aspx?no=1304109" target="_blank" rel="noopener">
+                <div class="news-src">뉴스토마토</div>
+                <div class="news-body">
+                    <h4>정청래 "1인1표 위해 수많은 피 흘려…당 주인은 당원"</h4>
+                    <div class="news-date">2025 · 정청래</div>
+                </div>
+                <div class="news-arrow">→</div>
+            </a>
+
+            <a class="news-item fade-in" href="https://www.khan.co.kr/article/202511202009001" target="_blank" rel="noopener">
+                <div class="news-src">경향신문</div>
+                <div class="news-body">
+                    <h4>민주당 대의원·권리당원 '1인1표제' 전당원 투표에 87% 찬성</h4>
+                    <div class="news-date">2025.11.20</div>
+                </div>
+                <div class="news-arrow">→</div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ JOIN ═══ -->
+<section id="join">
+    <div class="sec-wrap">
+        <h2>지금 바로 함께하세요</h2>
+        <p class="join-sub">
+            당원주권시대는 당원이 주인이 되는 민주당을 만들기 위한<br>
+            자발적인 당원 운동입니다. 함께하는 사람이 많을수록<br>더 큰 변화를 만들 수 있습니다.
+        </p>
+        <div class="join-box">
+            <h4>📌 참여 전 확인해주세요</h4>
+            <ol>
+                <li>당원 주권 확대를 위한 1인 1표제를 찬성하시는 분</li>
+                <li>더불어민주당의 발전을 진심으로 원하시는 분</li>
+                <li>비방·욕설 없이 건전한 소통 문화를 지킬 수 있는 분</li>
+            </ol>
+        </div>
+        <a href="https://invite.kakao.com/tc/oxjCPbgcmC" class="btn-kakao" target="_blank" rel="noopener" style="font-size:1.05rem; padding:16px 42px;">
+            💬 카카오톡 소통방 입장하기
+        </a>
+    </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+    <div class="footer-name">당원주권을 위한 1인1표시대</div>
+    <p>
+        더불어민주당 당원주권 강화 운동 · 약칭 당원주권시대<br>
+        소통: <a href="https://invite.kakao.com/tc/oxjCPbgcmC" target="_blank" rel="noopener">카카오톡 소통방</a><br>
+        © 2026 당원주권시대. All Rights Reserved.
+    </p>
+</footer>
+
+<script>
+    // 모바일 메뉴
+    function toggleMenu() {
+        document.getElementById('mobileNav').classList.toggle('open');
+    }
+    function closeMenu() {
+        document.getElementById('mobileNav').classList.remove('open');
+    }
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 10) document.getElementById('mobileNav').classList.remove('open');
+    });
+
+    // 발언 토글
+    function toggleSpeech(btn) {
+        const list = btn.nextElementSibling;
+        const isOpen = list.classList.contains('open');
+        // 같은 카드 닫기
+        document.querySelectorAll('.speech-list.open').forEach(el => {
+            el.classList.remove('open');
+            el.previousElementSibling.textContent = '발언 보기 ▼';
+        });
+        if (!isOpen) {
+            list.classList.add('open');
+            btn.textContent = '발언 닫기 ▲';
+        }
+    }
+
+    // 스크롤 페이드인
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
