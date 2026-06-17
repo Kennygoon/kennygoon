@@ -574,6 +574,20 @@
 
         .m-speeches.pending { color: #9CA3AF; }
 
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 4px 13px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+        .status-badge.agree  { background: #E8F5E9; color: #2E7D32; }
+        .status-badge.hold   { background: #FFF8E1; color: #E65100; }
+        .status-badge.unknown{ background: #F3F4F6; color: #6B7280; }
+
         .speech-btn {
             background: var(--bg-light);
             color: var(--blue);
@@ -769,6 +783,15 @@
             .member-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
+        /* ─── LOADING ─── */
+        .load-msg {
+            color: #9CA3AF;
+            font-size: 0.9rem;
+            padding: 20px 0;
+            text-align: center;
+            width: 100%;
+        }
+
         /* ─── SCROLL ANIMATION ─── */
         .fade-in {
             opacity: 0;
@@ -950,75 +973,10 @@
         <div class="cat-wrap">
             <div class="cat-head">
                 <h3>🏆 당대표 후보</h3>
-                <span class="cat-cnt">4명</span>
+                <span class="cat-cnt" id="cnt-leader">로딩 중…</span>
             </div>
-            <div class="member-grid">
-                <div class="m-card fade-in">
-                    <div class="avatar">청</div>
-                    <div class="m-name">정청래</div>
-                    <div class="m-district">서울 마포을</div>
-                    <div class="m-term">4선 · 현 당대표</div>
-                    <div class="m-speeches">💬 찬성 발언 5건 확인</div>
-                    <button class="speech-btn" onclick="toggleSpeech(this)">발언 보기 ▼</button>
-                    <div class="speech-list">
-                        <div class="sp-item">
-                            "당원 1표제로 이재명 정부 성공시키겠다"
-                            <a href="https://www.fnnews.com/news/202606171014434974" target="_blank" rel="noopener">파이낸셜뉴스 2026.06.17 →</a>
-                        </div>
-                        <div class="sp-item">
-                            "당의 주인은 당원" — 1인1표제 앞세워 연임 출사표
-                            <a href="https://www.hankookilbo.com/news/article/A2026061609120004914" target="_blank" rel="noopener">한국일보 2026.06.16 →</a>
-                        </div>
-                        <div class="sp-item">
-                            "1인1표는 민주주의 그 자체, 반드시 지켜져야"
-                            <a href="https://www.thepublic.kr/news/articleView.html?idxno=307511" target="_blank" rel="noopener">더퍼블릭 2026 →</a>
-                        </div>
-                        <div class="sp-item">
-                            "1인1표는 민주주의 원칙" — 전당대회 체제 돌입
-                            <a href="https://edaily.co.kr/News/Read?mediaCodeNo=257&newsId=04172166645482376" target="_blank" rel="noopener">이데일리 2026 →</a>
-                        </div>
-                        <div class="sp-item">
-                            "1인1표 위해 수많은 피 흘려…당 주인은 당원"
-                            <a href="http://www.newstomato.com/ReadNews.aspx?no=1304109" target="_blank" rel="noopener">뉴스토마토 2025 →</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="m-card fade-in">
-                    <div class="avatar">민</div>
-                    <div class="m-name">김민석</div>
-                    <div class="m-district">서울 영등포을</div>
-                    <div class="m-term">5선 · 전 국무총리</div>
-                    <div class="m-speeches pending">🔍 발언 취합 중</div>
-                    <button class="speech-btn" onclick="toggleSpeech(this)">발언 보기 ▼</button>
-                    <div class="speech-list">
-                        <div class="sp-item">발언 확인 중입니다. 곧 업데이트됩니다.</div>
-                    </div>
-                </div>
-
-                <div class="m-card fade-in">
-                    <div class="avatar">영</div>
-                    <div class="m-name">송영길</div>
-                    <div class="m-district">인천 연수갑</div>
-                    <div class="m-term">6선</div>
-                    <div class="m-speeches pending">🔍 발언 취합 중</div>
-                    <button class="speech-btn" onclick="toggleSpeech(this)">발언 보기 ▼</button>
-                    <div class="speech-list">
-                        <div class="sp-item">발언 확인 중입니다. 곧 업데이트됩니다.</div>
-                    </div>
-                </div>
-
-                <div class="m-card fade-in">
-                    <div class="avatar">용</div>
-                    <div class="m-name">김용민</div>
-                    <div class="m-district">서울 노원병</div>
-                    <div class="m-term">2선</div>
-                    <div class="m-speeches pending">🔍 발언 취합 중</div>
-                    <button class="speech-btn" onclick="toggleSpeech(this)">발언 보기 ▼</button>
-                    <div class="speech-list">
-                        <div class="sp-item">발언 확인 중입니다. 곧 업데이트됩니다.</div>
-                    </div>
-                </div>
+            <div class="member-grid" id="grid-leader">
+                <p class="load-msg">⏳ 데이터를 불러오는 중입니다…</p>
             </div>
         </div>
 
@@ -1026,69 +984,21 @@
         <div class="cat-wrap">
             <div class="cat-head">
                 <h3>⭐ 최고위원 후보</h3>
-                <span class="cat-cnt">확정 후 업데이트</span>
+                <span class="cat-cnt" id="cnt-supreme">로딩 중…</span>
             </div>
-            <div class="member-grid">
-                <div class="m-card tbd fade-in">
-                    <div class="avatar" style="background:#C8D0DB;">?</div>
-                    <div class="m-name">후보 확정 후</div>
-                    <div class="m-district">업데이트 예정</div>
-                </div>
-                <div class="m-card tbd fade-in">
-                    <div class="avatar" style="background:#C8D0DB;">?</div>
-                    <div class="m-name">후보 확정 후</div>
-                    <div class="m-district">업데이트 예정</div>
-                </div>
-                <div class="m-card tbd fade-in">
-                    <div class="avatar" style="background:#C8D0DB;">?</div>
-                    <div class="m-name">후보 확정 후</div>
-                    <div class="m-district">업데이트 예정</div>
-                </div>
+            <div class="member-grid" id="grid-supreme">
+                <p class="load-msg">⏳ 데이터를 불러오는 중입니다…</p>
             </div>
         </div>
 
-        <!-- 일반 의원 (가나다순) -->
+        <!-- 일반 의원 -->
         <div class="cat-wrap">
             <div class="cat-head">
                 <h3>🧑‍💼 일반 의원</h3>
-                <span class="cat-cnt">확인 2명 (업데이트 중)</span>
+                <span class="cat-cnt" id="cnt-general">로딩 중…</span>
             </div>
-            <div class="member-grid">
-                <!-- 문정복 -->
-                <div class="m-card fade-in">
-                    <div class="avatar">정</div>
-                    <div class="m-name">문정복</div>
-                    <div class="m-district">경기 시흥갑</div>
-                    <div class="m-term">재선 · 현 최고위원</div>
-                    <div class="m-speeches">💬 찬성 발언 1건 확인</div>
-                    <button class="speech-btn" onclick="toggleSpeech(this)">발언 보기 ▼</button>
-                    <div class="speech-list">
-                        <div class="sp-item">
-                            "당원주권 시대 열렸다" — 1인1표제 통과 환영 성명
-                            <a href="https://www.news1.kr/politics/assembly/6061041" target="_blank" rel="noopener">뉴스1 2026 →</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 이성윤 -->
-                <div class="m-card fade-in">
-                    <div class="avatar">성</div>
-                    <div class="m-name">이성윤</div>
-                    <div class="m-district">인천 계양을</div>
-                    <div class="m-term">초선 · 현 최고위원</div>
-                    <div class="m-speeches">💬 찬성 발언 2건 확인</div>
-                    <button class="speech-btn" onclick="toggleSpeech(this)">발언 보기 ▼</button>
-                    <div class="speech-list">
-                        <div class="sp-item">
-                            "1인1표제는 헌법의 민주주의 원리를 당 안에서도 실현하자는 것"
-                            <a href="https://www.huffingtonpost.kr/article/257883" target="_blank" rel="noopener">허프포스트 2025 →</a>
-                        </div>
-                        <div class="sp-item">
-                            "더 민주적인 정당으로 나아가기 위해 1인 1표 체제를 정착시켜야 한다"
-                            <a href="https://www.kado.net/news/articleView.html?idxno=2026408" target="_blank" rel="noopener">강원도민일보 2026 →</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="member-grid" id="grid-general">
+                <p class="load-msg">⏳ 데이터를 불러오는 중입니다…</p>
             </div>
         </div>
     </div>
@@ -1230,42 +1140,168 @@
 </footer>
 
 <script>
-    // 모바일 메뉴
-    function toggleMenu() {
-        document.getElementById('mobileNav').classList.toggle('open');
-    }
-    function closeMenu() {
-        document.getElementById('mobileNav').classList.remove('open');
-    }
+    /* ── 모바일 메뉴 ── */
+    function toggleMenu() { document.getElementById('mobileNav').classList.toggle('open'); }
+    function closeMenu()  { document.getElementById('mobileNav').classList.remove('open'); }
     window.addEventListener('scroll', () => {
         if (window.scrollY > 10) document.getElementById('mobileNav').classList.remove('open');
     });
 
-    // 발언 토글
+    /* ── 발언 토글 ── */
     function toggleSpeech(btn) {
         const list = btn.nextElementSibling;
         const isOpen = list.classList.contains('open');
-        // 같은 카드 닫기
         document.querySelectorAll('.speech-list.open').forEach(el => {
             el.classList.remove('open');
             el.previousElementSibling.textContent = '발언 보기 ▼';
         });
-        if (!isOpen) {
-            list.classList.add('open');
-            btn.textContent = '발언 닫기 ▲';
+        if (!isOpen) { list.classList.add('open'); btn.textContent = '발언 닫기 ▲'; }
+    }
+
+    /* ── 스크롤 페이드인 ── */
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    /* ══════════════════════════════════════════
+       구글 시트 자동 연동
+       시트 ID: 1P6lTWDU_iuCdOvu9_VefeQwfAdO9OYsmsXemsrQCEz8
+       역할 입력 규칙:
+         당대표 후보  → "당대표 후보" 포함
+         최고위원 후보 → "최고위원 후보" 포함
+         그 외       → 일반 의원으로 분류
+    ══════════════════════════════════════════ */
+    const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTK_Wf4cYH0nOAQv1NYQmLAgZEpeWjayn1FIjnAVd7hLthplCMoWJ-RJMQ5d9-LXc2-yYdn7OAjU76l/pub?output=csv';
+
+    /* CSV 파싱 (따옴표·줄바꿈 처리 포함) */
+    function parseCSV(text) {
+        const rows = []; let row = [], field = '', inQ = false;
+        for (let i = 0; i < text.length; i++) {
+            const c = text[i];
+            if (inQ) {
+                if (c === '"' && text[i+1] === '"') { field += '"'; i++; }
+                else if (c === '"') inQ = false;
+                else field += c;
+            } else {
+                if (c === '"') inQ = true;
+                else if (c === ',') { row.push(field); field = ''; }
+                else if (c === '\n' || (c === '\r' && text[i+1] === '\n')) {
+                    row.push(field); field = '';
+                    if (row.some(v => v)) rows.push(row);
+                    row = []; if (c === '\r') i++;
+                } else field += c;
+            }
+        }
+        if (field || row.length) { row.push(field); if (row.some(v => v)) rows.push(row); }
+        return rows;
+    }
+
+    /* 카드 HTML 생성 */
+    function buildCard(m) {
+        const badge = m.status === '찬성'   ? '<div class="status-badge agree">✅ 찬성</div>'
+                    : m.status === '유보'   ? '<div class="status-badge hold">⚠️ 유보</div>'
+                    :                         '<div class="status-badge unknown">❓ 확인불가</div>';
+
+        const speechLabel = m.status === '찬성'
+            ? `💬 찬성 발언 ${m.speeches.length}건 확인`
+            : m.status === '유보'
+            ? `💬 유보 발언 ${m.speeches.length}건`
+            : '🔍 공개 발언 미확인';
+        const speechClass = m.status === '찬성' ? '' : 'pending';
+
+        const items = m.speeches.length
+            ? m.speeches.map(s => `
+                <div class="sp-item">
+                    "${s.content}"
+                    <a href="${s.link}" target="_blank" rel="noopener">${s.source} ${s.date} →</a>
+                </div>`).join('')
+            : '<div class="sp-item">공개 발언이 확인되지 않았습니다.</div>';
+
+        return `
+        <div class="m-card fade-in">
+            <div class="avatar">${m.name.charAt(0)}</div>
+            <div class="m-name">${m.name}</div>
+            <div class="m-district">${m.district}</div>
+            <div class="m-term">${m.term}${m.role ? ' · ' + m.role : ''}</div>
+            ${badge}
+            <div class="m-speeches ${speechClass}">${speechLabel}</div>
+            <button class="speech-btn" onclick="toggleSpeech(this)">발언 보기 ▼</button>
+            <div class="speech-list">${items}</div>
+        </div>`;
+    }
+
+    /* 그리드 렌더링 */
+    function renderGrid(gridId, cntId, members, emptyMsg) {
+        const grid = document.getElementById(gridId);
+        const cnt  = document.getElementById(cntId);
+        if (!members.length) {
+            cnt.textContent  = emptyMsg;
+            grid.innerHTML   = `<p class="load-msg">${emptyMsg}</p>`;
+            return;
+        }
+        cnt.textContent = members.length + '명';
+        grid.innerHTML  = members.map(buildCard).join('');
+        grid.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    }
+
+    /* 시트 로드 & 렌더 */
+    async function loadMembers() {
+        try {
+            const res  = await fetch(CSV_URL);
+            const text = await res.text();
+            const rows = parseCSV(text);
+            if (rows.length < 2) throw new Error('데이터 없음');
+
+            const headers = rows[0].map(h => h.trim());
+            const data    = rows.slice(1).map(row => {
+                const obj = {};
+                headers.forEach((h, i) => obj[h] = (row[i] || '').trim());
+                return obj;
+            }).filter(r => r['이름']);
+
+            /* 이름별로 그룹화 (발언 여러 건 처리) */
+            const map = new Map();
+            data.forEach(r => {
+                const key = r['이름'];
+                if (!map.has(key)) {
+                    map.set(key, {
+                        name: r['이름'], district: r['지역구'],
+                        term: r['선수'], role: r['역할'],
+                        status: r['상태'], speeches: []
+                    });
+                }
+                if (r['발언내용']) {
+                    map.get(key).speeches.push({
+                        content: r['발언내용'], link: r['발언링크'],
+                        source: r['발언언론사'], date: r['발언날짜']
+                    });
+                }
+            });
+
+            const all      = Array.from(map.values());
+            const leaders  = all.filter(m => m.role.includes('당대표 후보'));
+            const supreme  = all.filter(m => m.role.includes('최고위원 후보'));
+            const general  = all.filter(m => !m.role.includes('당대표 후보') && !m.role.includes('최고위원 후보'))
+                               .sort((a, b) => a.name.localeCompare(b.name, 'ko'));
+
+            renderGrid('grid-leader',  'cnt-leader',  leaders, '데이터를 입력해주세요');
+            renderGrid('grid-supreme', 'cnt-supreme', supreme, '후보 확정 후 업데이트됩니다');
+            renderGrid('grid-general', 'cnt-general', general, '데이터를 입력해주세요');
+
+        } catch (err) {
+            console.warn('시트 로드 실패 — 시트가 웹에 게시되었는지 확인하세요:', err);
+            ['grid-leader','grid-supreme','grid-general'].forEach(id => {
+                document.getElementById(id).innerHTML =
+                    '<p class="load-msg">⚠️ 시트 연결 오류. 구글 시트 공개 배포 설정을 확인하세요.</p>';
+            });
+            ['cnt-leader','cnt-supreme','cnt-general'].forEach(id => {
+                document.getElementById(id).textContent = '연결 오류';
+            });
         }
     }
 
-    // 스크롤 페이드인
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, { threshold: 0.08 });
-
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    loadMembers();
 </script>
 </body>
 </html>
