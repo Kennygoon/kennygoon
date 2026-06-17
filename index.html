@@ -1172,7 +1172,7 @@
          최고위원 후보 → "최고위원 후보" 포함
          그 외       → 일반 의원으로 분류
     ══════════════════════════════════════════ */
-    const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTK_Wf4cYH0nOAQv1NYQmLAgZEpeWjayn1FIjnAVd7hLthplCMoWJ-RJMQ5d9-LXc2-yYdn7OAjU76l/pub?output=csv';
+    const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTK_Wf4cYH0nOAQv1NYQmLAgZEpeWjayn1FIjnAVd7hLthplCMoWJ-RJMQ5d9-LXc2-yYdn7OAjU76l/pub?gid=0&single=true&output=csv';
 
     /* CSV 파싱 (따옴표·줄바꿈 처리 포함) */
     function parseCSV(text) {
@@ -1218,9 +1218,13 @@
                 </div>`).join('')
             : '<div class="sp-item">공개 발언이 확인되지 않았습니다.</div>';
 
+        const avatarInner = m.photo
+            ? `<img src="${m.photo}" alt="${m.name}" onerror="this.parentNode.innerHTML='${m.name.charAt(0)}'">`
+            : m.name.charAt(0);
+
         return `
         <div class="m-card fade-in">
-            <div class="avatar">${m.name.charAt(0)}</div>
+            <div class="avatar">${avatarInner}</div>
             <div class="m-name">${m.name}</div>
             <div class="m-district">${m.district}</div>
             <div class="m-term">${m.term}${m.role ? ' · ' + m.role : ''}</div>
@@ -1265,10 +1269,13 @@
             data.forEach(r => {
                 const key = r['이름'];
                 if (!map.has(key)) {
+                    // 사진URL: 시트 직접 입력 → dept_cd 자동 생성 → 없으면 null
+                    const photoUrl = r['사진URL'] ||
+                        (r['dept_cd'] ? `https://www.assembly.go.kr/photo/${r['dept_cd']}.jpg` : null);
                     map.set(key, {
                         name: r['이름'], district: r['지역구'],
                         term: r['선수'], role: r['역할'],
-                        status: r['상태'], speeches: []
+                        status: r['상태'], photo: photoUrl, speeches: []
                     });
                 }
                 if (r['발언내용']) {
@@ -1280,8 +1287,10 @@
             });
 
             const all      = Array.from(map.values());
-            const leaders  = all.filter(m => m.role.includes('당대표 후보'));
-            const supreme  = all.filter(m => m.role.includes('최고위원 후보'));
+            const leaders  = all.filter(m => m.role.includes('당대표 후보'))
+                               .sort((a, b) => a.name.localeCompare(b.name, 'ko'));
+            const supreme  = all.filter(m => m.role.includes('최고위원 후보'))
+                               .sort((a, b) => a.name.localeCompare(b.name, 'ko'));
             const general  = all.filter(m => !m.role.includes('당대표 후보') && !m.role.includes('최고위원 후보'))
                                .sort((a, b) => a.name.localeCompare(b.name, 'ko'));
 
