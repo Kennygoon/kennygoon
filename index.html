@@ -1255,7 +1255,16 @@
             const res  = await fetch(CSV_URL);
             const text = await res.text();
             const rows = parseCSV(text);
-            if (rows.length < 2) throw new Error('데이터 없음');
+            if (rows.length < 2) {
+                ['grid-leader','grid-supreme','grid-general'].forEach(id => {
+                    document.getElementById(id).innerHTML =
+                        '<p class="load-msg">📋 시트에 데이터를 입력해주세요.</p>';
+                });
+                ['cnt-leader','cnt-supreme','cnt-general'].forEach(id => {
+                    document.getElementById(id).textContent = '0명';
+                });
+                return;
+            }
 
             const headers = rows[0].map(h => h.trim());
             const data    = rows.slice(1).map(row => {
