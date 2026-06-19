@@ -1601,8 +1601,8 @@
                 const res2 = await fetch(CSV_URL);
                 text = await res2.text();
             }
-            const rows = parseCSV(text);
-            if (rows.length < 2) {
+            const data = parseCSV(text).filter(r => r['이름']);
+            if (data.length < 1) {
                 ['grid-leader','grid-supreme','grid-general'].forEach(id => {
                     document.getElementById(id).innerHTML =
                         '<p class="load-msg">📋 시트에 데이터를 입력해주세요.</p>';
@@ -1612,13 +1612,6 @@
                 });
                 return;
             }
-
-            const headers = rows[0].map(h => h.trim());
-            const data    = rows.slice(1).map(row => {
-                const obj = {};
-                headers.forEach((h, i) => obj[h] = (row[i] || '').trim());
-                return obj;
-            }).filter(r => r['이름']);
 
             /* 이름별로 그룹화 (발언 여러 건 처리) */
             const map = new Map();
