@@ -1,0 +1,1928 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>당원주권을 위한 1인1표시대</title>
+    <meta name="description" content="더불어민주당 당원 1인1표제를 당헌에 명시하여 진정한 당원 중심 정당을 만들기 위한 운동">
+    <meta property="og:title" content="당원주권을 위한 1인1표시대">
+    <meta property="og:description" content="당의 주인은 당원입니다. 1인1표제를 불가역적으로 제도화합시다.">
+    <style>
+        :root {
+            --blue: #004EA2;
+            --blue-dark: #003278;
+            --blue-mid: #1565C0;
+            --green: #007A3D;
+            --green-light: #009A4E;
+            --bg-light: #EEF4FF;
+            --text-dark: #111827;
+            --text-gray: #4B5563;
+            --white: #FFFFFF;
+            --border: #E5EAF3;
+            --kakao: #FEE500;
+            --kakao-text: #3C1E1E;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* ─── HEADER ─── */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 62px;
+            background: rgba(0, 50, 120, 0.97);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.25);
+        }
+
+        .nav-wrap {
+            max-width: 1180px;
+            margin: 0 auto;
+            height: 100%;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.05rem;
+            font-weight: 900;
+            letter-spacing: -0.3px;
+            line-height: 1.3;
+            text-decoration: none;
+        }
+
+        .logo em {
+            color: #7ECCEF;
+            font-style: normal;
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 500;
+            opacity: 0.85;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links a.nav-link {
+            color: rgba(255,255,255,0.82);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a.nav-link:hover { color: white; }
+
+        .kakao-btn {
+            background: var(--kakao);
+            color: var(--kakao-text);
+            padding: 9px 18px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 0.83rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            white-space: nowrap;
+            border: none;
+            cursor: pointer;
+        }
+
+        .kakao-btn:hover {
+            filter: brightness(1.05);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+        }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 6px;
+        }
+        .hamburger span { width: 22px; height: 2px; background: white; display: block; border-radius: 2px; }
+
+        /* Mobile nav */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 62px;
+            left: 0;
+            right: 0;
+            background: var(--blue-dark);
+            padding: 12px 20px 20px;
+            z-index: 999;
+            flex-direction: column;
+            gap: 4px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+        .mobile-nav.open { display: flex; }
+        .mobile-nav a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            font-size: 0.95rem;
+            padding: 11px 4px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .mobile-nav a:last-child { border-bottom: none; }
+
+        /* ─── HERO ─── */
+        #hero {
+            min-height: 100vh;
+            padding-top: 62px;
+            background: linear-gradient(150deg, #002060 0%, #004EA2 45%, #005F30 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -15%;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(0,154,78,0.12) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        #hero::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(126,204,239,0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 36px 20px 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(126,204,239,0.3);
+            color: #7ECCEF;
+            padding: 7px 18px;
+            border-radius: 30px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            margin-bottom: 28px;
+        }
+
+        .hero-title {
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            font-weight: 900;
+            color: white;
+            line-height: 1.15;
+            letter-spacing: -1.5px;
+            margin-bottom: 24px;
+        }
+
+        .hero-title .hl { color: #7ECCEF; }
+        .hero-title .hl2 { color: #63E6A0; }
+
+        .hero-sub {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: rgba(255,255,255,0.82);
+            max-width: 600px;
+            line-height: 1.75;
+            margin-bottom: 40px;
+        }
+
+        .hero-sub strong { color: white; font-weight: 700; }
+
+        .hero-cta {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 64px;
+        }
+
+        .btn-kakao {
+            background: var(--kakao);
+            color: var(--kakao-text);
+            padding: 15px 34px;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.25s;
+        }
+
+        .btn-kakao:hover {
+            filter: brightness(1.05);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(254,229,0,0.35);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            padding: 15px 34px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            border: 2px solid rgba(255,255,255,0.45);
+            transition: all 0.25s;
+        }
+
+        .btn-outline:hover {
+            border-color: white;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+            flex-wrap: wrap;
+        }
+
+        .stat-box { text-align: left; }
+
+        .stat-num {
+            display: block;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            color: white;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .stat-num.green { color: #63E6A0; }
+
+        .stat-lbl {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.65);
+            font-weight: 400;
+        }
+
+        /* ─── SECTION COMMONS ─── */
+        .section {
+            padding: 88px 20px;
+        }
+
+        .section.bg-light { background: #F2F6FF; }
+        .section.bg-white { background: white; }
+        .section.bg-gray { background: #F8F9FB; }
+
+        .sec-wrap {
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
+        .sec-head {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .sec-badge {
+            display: inline-block;
+            background: var(--bg-light);
+            color: var(--blue);
+            padding: 5px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        .sec-title {
+            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+            font-weight: 900;
+            color: var(--text-dark);
+            letter-spacing: -0.8px;
+            line-height: 1.25;
+        }
+
+        .sec-desc {
+            margin-top: 12px;
+            color: var(--text-gray);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* ─── ABOUT ─── */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .about-left h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--blue);
+            margin-bottom: 18px;
+        }
+
+        .about-left p {
+            color: var(--text-gray);
+            font-size: 1rem;
+            line-height: 1.85;
+            margin-bottom: 18px;
+        }
+
+        .about-left p strong { color: var(--text-dark); }
+
+        .about-right {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .about-card {
+            background: white;
+            border-radius: 14px;
+            padding: 22px 24px;
+            border-left: 5px solid var(--green);
+            box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+        }
+
+        .about-card h4 {
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+
+        .about-card p {
+            font-size: 0.88rem;
+            color: var(--text-gray);
+            line-height: 1.65;
+        }
+
+        .about-card p strong { color: var(--blue); }
+
+        /* ─── POLICIES ─── */
+        .policy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .policy-card {
+            background: white;
+            border-radius: 16px;
+            padding: 28px 22px;
+            border: 2px solid transparent;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+
+        .policy-card:hover {
+            border-color: var(--blue);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 36px rgba(0,78,162,0.13);
+        }
+
+        .policy-card.star {
+            background: linear-gradient(140deg, var(--blue), var(--blue-mid));
+            color: white;
+            border: none;
+            grid-column: span 1;
+        }
+
+        .policy-icon {
+            font-size: 2rem;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .policy-tag {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 20px;
+            background: #E8F5E9;
+            color: var(--green);
+            margin-bottom: 14px;
+        }
+
+        .policy-card.star .policy-tag {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .policy-card h3 {
+            font-size: 1rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .policy-card.star h3 { color: white; }
+
+        .policy-card p {
+            font-size: 0.87rem;
+            color: var(--text-gray);
+            line-height: 1.65;
+        }
+
+        .policy-card.star p { color: rgba(255,255,255,0.85); }
+
+        /* ─── MEMBERS ─── */
+        .cat-wrap { margin-bottom: 64px; }
+
+        .cat-head {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 28px;
+            padding-bottom: 16px;
+            border-bottom: 3px solid var(--blue);
+        }
+
+        .cat-head h3 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--blue);
+        }
+
+        .cat-cnt {
+            background: var(--blue);
+            color: white;
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 3px 12px;
+            border-radius: 20px;
+        }
+
+        .member-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 20px;
+        }
+
+        .m-card {
+            background: white;
+            border-radius: 16px;
+            padding: 26px 18px 20px;
+            text-align: center;
+            box-shadow: 0 3px 18px rgba(0,0,0,0.07);
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .m-card:hover {
+            border-color: var(--blue);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0,78,162,0.13);
+        }
+
+        .m-card.tbd {
+            background: #F8F9FA;
+            border: 2px dashed #CDD2DA;
+        }
+
+        .avatar {
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            margin: 0 auto 14px;
+            background: linear-gradient(135deg, var(--blue), var(--green));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: white;
+            overflow: hidden;
+        }
+
+        .tbd .avatar { background: #C8D0DB; }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .m-name {
+            font-size: 1.08rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 3px;
+        }
+
+        .tbd .m-name { color: #9CA3AF; }
+
+        .m-district {
+            font-size: 0.82rem;
+            color: var(--text-gray);
+            margin-bottom: 6px;
+        }
+
+        .m-term {
+            display: inline-block;
+            background: var(--bg-light);
+            color: var(--blue);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 3px 11px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+
+        .m-speeches {
+            font-size: 0.82rem;
+            color: var(--green);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .m-speeches.pending { color: #9CA3AF; }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 4px 13px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+        .status-badge.agree  { background: #E8F5E9; color: #2E7D32; }
+        .status-badge.hold   { background: #FFF8E1; color: #E65100; }
+        .status-badge.unknown{ background: #F3F4F6; color: #6B7280; }
+
+        .speech-btn {
+            background: var(--bg-light);
+            color: var(--blue);
+            border: none;
+            padding: 7px 16px;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+            text-align: center;
+        }
+
+        .speech-btn:hover {
+            background: var(--blue);
+            color: white;
+        }
+
+        .speech-list {
+            display: none;
+            text-align: left;
+            margin-top: 12px;
+            background: #F3F7FF;
+            border-radius: 10px;
+            padding: 14px;
+        }
+
+        .speech-list.open { display: block; }
+
+        .sp-item {
+            font-size: 0.78rem;
+            color: var(--text-gray);
+            padding: 8px 0;
+            border-bottom: 1px solid #DDE4EF;
+            line-height: 1.5;
+        }
+
+        .sp-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+        .sp-item a {
+            display: block;
+            margin-top: 4px;
+            color: var(--blue);
+            font-weight: 600;
+            font-size: 0.74rem;
+            text-decoration: none;
+        }
+
+        .sp-item a:hover { text-decoration: underline; }
+
+        /* ─── NEWS ─── */
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .news-item {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            background: white;
+            border-radius: 12px;
+            padding: 18px 22px;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 2px 14px rgba(0,0,0,0.05);
+            transition: all 0.2s;
+            border-left: 4px solid transparent;
+        }
+
+        .news-item:hover {
+            border-left-color: var(--blue);
+            transform: translateX(4px);
+            box-shadow: 0 4px 22px rgba(0,78,162,0.1);
+        }
+
+        .news-src {
+            background: var(--bg-light);
+            color: var(--blue);
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 5px 10px;
+            border-radius: 6px;
+            min-width: 76px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .news-body { flex: 1; }
+
+        .news-body h4 {
+            font-size: 0.93rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.45;
+            margin-bottom: 3px;
+        }
+
+        .news-date { font-size: 0.78rem; color: #9CA3AF; }
+
+        .news-arrow {
+            color: var(--blue);
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        /* ─── JOIN ─── */
+        #join {
+            background: linear-gradient(150deg, #002060 0%, var(--blue) 50%, #005030 100%);
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        #join h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 900;
+            color: white;
+            margin-bottom: 18px;
+            letter-spacing: -1px;
+        }
+
+        #join .join-sub {
+            color: rgba(255,255,255,0.82);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 44px;
+        }
+
+        .join-box {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 14px;
+            padding: 24px 32px;
+            max-width: 580px;
+            margin: 0 auto 44px;
+            text-align: left;
+        }
+
+        .join-box h4 {
+            color: var(--kakao);
+            font-size: 0.88rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .join-box ol {
+            color: rgba(255,255,255,0.82);
+            font-size: 0.9rem;
+            line-height: 2.1;
+            padding-left: 20px;
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            background: #0F172A;
+            color: rgba(255,255,255,0.5);
+            padding: 44px 20px;
+            text-align: center;
+        }
+
+        .footer-name {
+            font-size: 1rem;
+            font-weight: 800;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 10px;
+        }
+
+        footer p { font-size: 0.82rem; line-height: 2; }
+
+        footer a { color: rgba(126,204,239,0.8); text-decoration: none; }
+        footer a:hover { color: #7ECCEF; }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 900px) {
+            .policy-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .policy-grid { grid-template-columns: 1fr; }
+            .hero-stats { gap: 28px; }
+            .section { padding: 60px 16px; }
+            .join-box { padding: 20px 20px; }
+            #hero { min-height: auto; padding-top: 62px; }
+            .hero-inner { padding: 18px 20px 30px; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-cta { flex-direction: column; }
+            .btn-kakao, .btn-outline { width: 100%; justify-content: center; }
+            .member-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* ─── LOADING ─── */
+        .load-msg {
+            color: #9CA3AF;
+            font-size: 0.9rem;
+            padding: 20px 0;
+            text-align: center;
+            width: 100%;
+        }
+
+        /* ─── SCROLL ANIMATION ─── */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(22px);
+            transition: opacity 0.55s ease, transform 0.55s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ─── 동참 서명 섹션 ─── */
+        .supporter-count-box {
+            text-align: center;
+            margin: 36px 0 16px;
+        }
+        .supporter-num {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 900;
+            color: #FFE066;
+            line-height: 1;
+            letter-spacing: -2px;
+        }
+        .supporter-label {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.8);
+            margin-top: 8px;
+            font-weight: 500;
+        }
+        .goal-bar-wrap {
+            width: 100%;
+            max-width: 460px;
+            margin: 16px auto 28px;
+            text-align: center;
+        }
+        .goal-bar-track {
+            background: rgba(255,255,255,0.18);
+            border-radius: 30px;
+            height: 10px;
+            overflow: hidden;
+        }
+        .goal-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #63E6A0, #009A4E);
+            border-radius: 30px;
+            width: 0%;
+            transition: width 1.6s cubic-bezier(.4,0,.2,1);
+        }
+        .goal-label {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.55);
+            margin-top: 6px;
+        }
+        .btn-agree-join {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #009A4E 0%, #006B35 100%);
+            color: white;
+            padding: 17px 48px;
+            border-radius: 12px;
+            font-weight: 900;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s;
+            margin-bottom: 36px;
+            box-shadow: 0 6px 24px rgba(0,154,78,0.45);
+            letter-spacing: -0.3px;
+        }
+        .btn-agree-join:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 36px rgba(0,154,78,0.55);
+        }
+        /* 히어로 아래 참여 카운터 + 롤링 메시지 섹션 */
+        .ticker-hero-section {
+            background: linear-gradient(180deg, #0d2a6b 0%, #0a3d7c 100%);
+            padding: 36px 20px 44px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .ticker-hero-section .supporter-count-box,
+        .ticker-hero-section .goal-bar-wrap,
+        .ticker-hero-section .btn-agree-join {
+            width: 100%;
+            max-width: 560px;
+        }
+        .ticker-hero-section .ticker-title {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.55);
+            margin-bottom: 12px;
+            text-align: center;
+            letter-spacing: 0.3px;
+        }
+        .ticker-hero-section .ticker-window {
+            max-width: 680px;
+            width: 100%;
+        }
+        /* 롤링 메시지 */
+        .ticker-section {
+            width: 100%;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+        .ticker-title {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.55);
+            margin-bottom: 10px;
+            text-align: center;
+            letter-spacing: 0.3px;
+        }
+        .ticker-window {
+            height: 120px;
+            overflow: hidden;
+            position: relative;
+            mask-image: linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%);
+        }
+        .ticker-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            animation: tickerScroll 25s linear infinite;
+        }
+        .ticker-cards:hover { animation-play-state: paused; }
+        .ticker-card {
+            background: rgba(255,255,255,0.09);
+            border: 1px solid rgba(255,255,255,0.13);
+            border-radius: 10px;
+            padding: 10px 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+        .ticker-name {
+            font-weight: 700;
+            color: #7ECCEF;
+            font-size: 0.82rem;
+            white-space: nowrap;
+            min-width: 48px;
+        }
+        .ticker-msg {
+            color: rgba(255,255,255,0.85);
+            font-size: 0.88rem;
+            line-height: 1.45;
+            text-align: left;
+        }
+        @keyframes tickerScroll {
+            0%   { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+        /* 모달 */
+        .join-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.68);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .join-modal-overlay.active { display: flex; }
+        .join-modal-box {
+            background: white;
+            border-radius: 20px;
+            padding: 36px 32px 28px;
+            max-width: 460px;
+            width: 100%;
+            max-height: 92vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 28px 90px rgba(0,0,0,0.45);
+        }
+        .modal-close {
+            position: absolute;
+            top: 14px; right: 18px;
+            background: none; border: none;
+            font-size: 1.3rem; cursor: pointer;
+            color: #9CA3AF; line-height: 1;
+        }
+        .modal-close:hover { color: #374151; }
+        .join-modal-box h3 {
+            font-size: 1.35rem; font-weight: 900;
+            color: #111827; margin-bottom: 4px;
+        }
+        .modal-sub { color: #6B7280; font-size: 0.88rem; margin-bottom: 22px; }
+        .form-group { margin-bottom: 16px; }
+        .form-group > label {
+            display: block; font-size: 0.85rem;
+            font-weight: 700; color: #374151; margin-bottom: 6px;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="tel"],
+        .form-group textarea {
+            width: 100%;
+            border: 1.5px solid #D1D5DB;
+            border-radius: 8px;
+            padding: 10px 13px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border 0.2s;
+            font-family: inherit;
+            color: #111827;
+            background: #FAFAFA;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #004EA2;
+            box-shadow: 0 0 0 3px rgba(0,78,162,0.1);
+            background: white;
+        }
+        .form-group textarea { resize: vertical; line-height: 1.5; }
+        .req { color: #EF4444; }
+        .radio-group { display: flex; gap: 20px; flex-wrap: wrap; }
+        .radio-label {
+            display: flex; align-items: center; gap: 6px;
+            font-size: 0.93rem; font-weight: 500;
+            color: #374151; cursor: pointer;
+        }
+        .char-count {
+            text-align: right; font-size: 0.76rem;
+            color: #9CA3AF; margin-top: 3px;
+        }
+        .checkbox-wrap {
+            display: flex; align-items: flex-start; gap: 8px;
+        }
+        .checkbox-wrap input[type="checkbox"] { margin-top: 3px; flex-shrink: 0; }
+        .checkbox-wrap label { font-size: 0.88rem; font-weight: 500; color: #374151; cursor: pointer; }
+        .consent-detail {
+            font-size: 0.73rem; color: #9CA3AF;
+            margin-top: 6px; line-height: 1.5;
+            background: #F9FAFB; padding: 8px 10px; border-radius: 6px;
+        }
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, #004EA2, #003278);
+            color: white; border: none; border-radius: 10px;
+            padding: 14px; font-size: 1rem; font-weight: 800;
+            cursor: pointer; transition: all 0.2s; margin-top: 6px;
+            font-family: inherit;
+        }
+        .btn-submit:hover { filter: brightness(1.1); }
+        .btn-submit:disabled { background: #9CA3AF; cursor: not-allowed; }
+        .submit-msg {
+            text-align: center; margin-top: 10px;
+            font-size: 0.88rem; font-weight: 600; min-height: 20px;
+        }
+        .submit-msg.success { color: #059669; }
+        .submit-msg.error   { color: #DC2626; }
+        @media (max-width: 480px) {
+            .join-modal-box { padding: 28px 20px 22px; }
+            .btn-agree-join { padding: 15px 34px; font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header>
+    <div class="nav-wrap">
+        <a href="#" class="logo">
+            당원주권을 위한 1인1표시대
+            <em>더불어민주당 당원주권 강화 운동</em>
+        </a>
+        <nav class="nav-links">
+            <a href="#about" class="nav-link">운동 소개</a>
+            <a href="#policies" class="nav-link">핵심 정책</a>
+            <a href="#members" class="nav-link">지지 의원</a>
+            <a href="#news" class="nav-link">찬성 발언</a>
+            <a href="https://invite.kakao.com/tc/oxjCPbgcmC" class="kakao-btn" target="_blank" rel="noopener">
+                💬 카카오톡 참여하기
+            </a>
+        </nav>
+        <button class="hamburger" onclick="toggleMenu()" aria-label="메뉴 열기">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</header>
+
+<!-- 모바일 메뉴 -->
+<nav class="mobile-nav" id="mobileNav">
+    <a href="#about" onclick="closeMenu()">운동 소개</a>
+    <a href="#policies" onclick="closeMenu()">핵심 정책</a>
+    <a href="#members" onclick="closeMenu()">지지 의원</a>
+    <a href="#news" onclick="closeMenu()">찬성 발언</a>
+    <a href="https://invite.kakao.com/tc/oxjCPbgcmC" class="kakao-btn" target="_blank" rel="noopener" style="margin-top:8px;justify-content:center;">💬 카카오톡 참여하기</a>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+    <div class="hero-inner">
+        <div class="hero-badge">✊ 이 운동은 특정 정치인이나 세력이 아닌 평당원이 만들어갑니다.</div>
+        <h1 class="hero-title">
+            당의 주인은<br>
+            <span class="hl">당원</span>입니다
+        </h1>
+        <p class="hero-sub">
+            더불어민주당을 지탱하는 권리당원의 한 표가<br>
+            한 표의 가치를 가질 때 민주당이 발전하고<br>
+            <strong>대한민국이 발전합니다.</strong>
+        </p>
+        <div class="hero-cta">
+            <a href="https://invite.kakao.com/tc/oxjCPbgcmC" class="btn-kakao" target="_blank" rel="noopener">
+                💬 지금 바로 참여하기
+            </a>
+            <a href="#about" class="btn-outline">운동 소개 보기</a>
+        </div>
+        <div class="hero-stats">
+            <div class="stat-box">
+                <span class="stat-num green">85.3%</span>
+                <span class="stat-lbl">권리당원 1인1표 찬성률</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-num">200만+</span>
+                <span class="stat-lbl">더불어민주당 권리당원</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ 참여 카운터 + 응원 메시지 롤링 ═══ -->
+<section class="ticker-hero-section">
+    <!-- 참여자 수 카운터 -->
+    <div class="supporter-count-box">
+        <div class="supporter-num" id="supporterCount">—</div>
+        <div class="supporter-label">명이 찬성 동참했습니다</div>
+    </div>
+    <!-- 목표 달성 바 -->
+    <div class="goal-bar-wrap">
+        <div class="goal-bar-track">
+            <div class="goal-bar-fill" id="goalBar"></div>
+        </div>
+        <div class="goal-label">목표 <strong style="color:rgba(255,255,255,0.75)">10,000명</strong> · <span id="goalPct">0</span>% 달성</div>
+    </div>
+    <!-- 찬성 동참 버튼 -->
+    <button class="btn-agree-join" onclick="openJoinModal()">
+        ✅ 찬성 동참하기
+    </button>
+    <!-- 응원 메시지 -->
+    <div class="ticker-title" style="margin-top:28px;">💬 동참자 응원의 목소리</div>
+    <div class="ticker-window">
+        <div class="ticker-cards" id="tickerCards"></div>
+    </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about" class="section bg-light">
+    <div class="sec-wrap">
+        <div class="sec-head">
+            <div class="sec-badge">📌 운동 소개</div>
+            <h2 class="sec-title">당원주권시대란 무엇인가</h2>
+            <p class="sec-desc">더불어민주당 권리당원들이 만들어가는 진정한 당원 중심 정당 운동</p>
+        </div>
+
+        <div class="about-grid">
+            <div class="about-left fade-in">
+                <h3>🎯 우리가 이 운동을 시작한 이유</h3>
+                <p>
+                    더불어민주당에는 현재 <strong>200만 명 이상의 권리당원</strong>이 있습니다. 이들은 매달 당비를 납부하며 당을 지켜왔지만, 여러 당내 선출 과정에서의 한표는 대의원 한 명보다 훨씬 작은 표의 가치를 가졌습니다.
+                </p>
+                <p>
+                    나라의 주인이 국민이듯, <strong>당의 주인은 당원</strong>입니다. 당원 1인1표제는 모든 권리당원이 동등한 한 표를 행사하는 가장 기본적인 <strong>민주주의 원칙</strong>입니다.
+                </p>
+                <p>
+                    2026년 1월 실시된 권리당원 의견수렴에서 무려 <strong>85.3%가 찬성</strong>했습니다. 이미 시대의 흐름은 정해졌습니다. 우리는 이 변화를 불가역적으로, 영구적으로 제도화하기 위해 뭉쳤습니다.
+                </p>
+                <p>
+                    당원주권시대는 정치인이나 계파가 아닌, <strong>진짜 당원이 중심</strong>이 되는 운동입니다. 당신의 참여가 민주주의의 역사를 바꿉니다.
+                </p>
+            </div>
+
+            <div class="about-right">
+                <div class="about-card fade-in">
+                    <h4>🗳️ 왜 1인1표인가?</h4>
+                    <p>당대표와 최고위원선거 외 대의원 한 명의 표는 수십 명 권리당원의 표를 합친 것과 같습니다. 보통·평등선거라는 <strong>민주주의의 기본 원칙</strong>을 당 안에서도 실현하기 위해 더 많은 선출 과정에서 1인 1표 제도가 확대되어야 합니다.</p>
+                </div>
+                <div class="about-card fade-in">
+                    <h4>🔒 불가역적 제도화가 필요한 이유</h4>
+                    <p>지도부가 바뀔 때마다 흔들리는 제도가 아니라, 당헌에 명시하여 어떤 세력도 되돌릴 수 없는 <strong>영구적인 당원 권리</strong>로 만들어야 합니다.</p>
+                </div>
+                <div class="about-card fade-in">
+                    <h4>🌊 이미 대세가 된 당원주권</h4>
+                    <p>권리당원 85.3% 찬성, 당대표 후보들의 공약 채택, 전국적인 당원 공감대. 지금 이 운동에 함께하는 것은 <strong>대세의 흐름</strong>에 올라타는 것입니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ POLICIES ═══ -->
+<section id="policies" class="section bg-white">
+    <div class="sec-wrap">
+        <div class="sec-head">
+            <div class="sec-badge">📋 핵심 정책</div>
+            <h2 class="sec-title">우리가 요구하는 변화</h2>
+            <p class="sec-desc">당원주권시대가 추진하는 6가지 핵심 정책</p>
+        </div>
+
+        <div class="policy-grid">
+            <div class="policy-card star fade-in">
+                <span class="policy-icon">⭐</span>
+                <div class="policy-tag">최우선 과제</div>
+                <h3>당원 1인1표제 당헌 명시</h3>
+                <p>1인1표제를 당헌에 불가역적으로 명시합니다. 어떤 지도부가 와도 되돌릴 수 없는 영구적 당원 권리로 확립합니다.</p>
+            </div>
+            <div class="policy-card fade-in" style="position:relative;">
+                <span class="policy-icon">🗳️</span>
+                <div class="policy-tag">핵심 과제</div>
+                <h3>시도당위원장 1인1표 선출</h3>
+                <p>전국 시도당위원장 선출도 권리당원의 1인1표 방식으로 전환하여 지역 당원의 권리를 완전히 보장합니다.</p>
+                <div style="
+                    position:absolute;
+                    top:18px;
+                    right:18px;
+                    background:#007A3D;
+                    color:white;
+                    font-size:0.72rem;
+                    font-weight:800;
+                    padding:5px 11px;
+                    border-radius:20px;
+                    letter-spacing:-0.3px;
+                    line-height:1.4;
+                    text-align:center;
+                    box-shadow:0 2px 8px rgba(0,122,61,0.35);
+                ">✅ 8월 17일<br>전당대회 적용 확정</div>
+            </div>
+            <div class="policy-card fade-in">
+                <span class="policy-icon">🔓</span>
+                <div class="policy-tag">핵심 과제</div>
+                <h3>열린 공천 및 경선 활성화</h3>
+                <p>총선·지선에서 전략공천·단수공천을 지양하고, 당원이 참여하는 공정한 경선 문화를 정착시킵니다.</p>
+            </div>
+            <div class="policy-card fade-in">
+                <span class="policy-icon">📱</span>
+                <h3>카카오 투표 확대</h3>
+                <p>경선 및 중요 결정에서 카카오 투표를 확대하여 더 많은 당원이 쉽고 편리하게 민주적 의사결정에 참여합니다.</p>
+            </div>
+            <div class="policy-card fade-in">
+                <span class="policy-icon">💬</span>
+                <h3>당원 제안 제도 확대</h3>
+                <p>당원이 정책을 직접 제안하고 반영할 수 있는 공식 채널을 강화하여 아래로부터의 민주주의를 실현합니다.</p>
+            </div>
+            <div class="policy-card fade-in">
+                <span class="policy-icon">🏛️</span>
+                <h3>전당원 투표 확대</h3>
+                <p>당의 중요 결정에 전 당원이 직접 투표로 참여하는 제도를 도입하고 활성화하여 진정한 당원 자치를 실현합니다.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ MEMBERS ═══ -->
+<section id="members" class="section bg-gray">
+    <div class="sec-wrap">
+        <div class="sec-head">
+            <div class="sec-badge">👥 지지 국회의원</div>
+            <h2 class="sec-title">1인1표 찬성 국회의원</h2>
+            <p class="sec-desc">당원주권 1인1표를 지지하는 국회의원들이 함께합니다. 더 많은 의원들이 함께하고 있습니다.</p>
+        </div>
+
+        <!-- 당대표 후보 -->
+        <div class="cat-wrap">
+            <div class="cat-head">
+                <h3>🏆 당대표 후보</h3>
+                <span class="cat-cnt" id="cnt-leader">로딩 중…</span>
+            </div>
+            <div class="member-grid" id="grid-leader">
+                <p class="load-msg">⏳ 데이터를 불러오는 중입니다…</p>
+            </div>
+        </div>
+
+        <!-- 최고위원 후보 -->
+        <div class="cat-wrap">
+            <div class="cat-head">
+                <h3>⭐ 최고위원 후보</h3>
+                <span class="cat-cnt" id="cnt-supreme">로딩 중…</span>
+            </div>
+            <div class="member-grid" id="grid-supreme">
+                <p class="load-msg">⏳ 데이터를 불러오는 중입니다…</p>
+            </div>
+        </div>
+
+        <!-- 일반 의원 -->
+        <div class="cat-wrap">
+            <div class="cat-head">
+                <h3>🧑‍💼 일반 의원</h3>
+                <span class="cat-cnt" id="cnt-general">로딩 중…</span>
+            </div>
+            <div class="member-grid" id="grid-general">
+                <p class="load-msg">⏳ 데이터를 불러오는 중입니다…</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ NEWS ═══ -->
+<section id="news" class="section bg-light">
+    <div class="sec-wrap">
+        <div class="sec-head">
+            <div class="sec-badge">📰 찬성 발언 뉴스</div>
+            <h2 class="sec-title">1인1표 찬성 발언 언론 보도</h2>
+            <p class="sec-desc">2020년 이후 주요 국회의원의 1인1표 찬성 발언 언론 기사 (최신순)</p>
+        </div>
+
+        <div class="news-list">
+            <a class="news-item fade-in" href="https://www.fnnews.com/news/202606171014434974" target="_blank" rel="noopener">
+                <div class="news-src">파이낸셜뉴스</div>
+                <div class="news-body">
+                    <h4>정청래 "친청파·친석파 악의적 갈라치기…당원 1표제로 李정부 성공"</h4>
+                    <div class="news-date">2026.06.17 · 정청래</div>
+                </div>
+                <div class="news-arrow">→</div>
+            </a>
+
+            <a class="news-item fade-in" href="https://www.hankookilbo.com/news/article/A2026061609120004914" target="_blank" rel="noopener">
+                <div class="news-src">한국일보</div>
+                <div class="news-body">
+                    <h4>"당의 주인은 당원"··· 정청래, 1인 1표제 앞세워 연임 출사표</h4>
+                    <div class="news-date">2026.06.16 · 정청래</div>
+                </div>
+                <div class="news-arrow">→</div>
+            </a>
+
+            <a class="news-item fade-in" href="https://www.sisajournal.com/news/articleView.html?idxno=376583" target="_blank" rel="noopener">
+                <div class="news-src">시사저널</div>
+                <div class="news-body">
+                    <h4>정청래 "당 운영은 결국 당원이 하는 것"…1인1표제 재강조</h4>
+                    <div class="news-date">2026.06 · 정청래</div>
+                </div>
+                <div class="news-arrow">→</div>
+            </a>
+
+            <a class="news-item fade-in" href="https://www.kado.net/news/articleView.html?idxno=2026408" target="_blank" rel="noopener">
+                <div class="news-src">강원도민일보</div>
+                <div class="news-body">
+                    <h4>민주당 최고위원 보선 토론회…'1인1표'엔 공감, 당청 관계엔 온도차 (이성윤 발언)</h4>
+                    <div class="news-date">2026 · 이성윤</div>
+                </div>
+                <div class="news-arrow">→</div>
+            </a>
+
+            <a class="news-item fade-in" href="https://www.khan.co.kr/article/202601241902001" target="_blank" rel="noopener">
+                <div class="news-src">경향신문</div>
+                <div class="news-body">
+                    <h4>정청래표 '1인 1표제', 민주당 권리당원 찬성률 85.3%</h4>
+                    <div class="news-date">2026.01.24 · 정청래</div>
+                </div>
+                <div class="news-arrow">→</div>
+            </a>
+
+            <a class="news-item fade-in" href="https://www.hankookilbo.com/news/article/amp/A2026012313510002425" target="_blank" rel="noopener">
+                <div class="news-src">한국일보</div>
+                <div class="news-body">
+                    <h4>민주당 '1인 1표제' 권리당원 85% 찬성… 정청래 "압도적 다수 뜻 확인"</h4>
+                    <div class="news-date">2026.01.23 · 정청래</div>
+                </div>
+                <div class="news-arrow">→</div>
+            </a>
+
+            <a class="news-item fade-in" href="https://www.news1.kr/politics/assembly/6061041" target="_blank" rel="noopener">
+                <div class="news-src">뉴스1</div>
+                <div class="news-body">
+                    <h4>1인1표제 통과에 친청계 "환영"…문정복·이성윤·박수현 "당원주권 시대 열렸다"</h4>
+                    <div class="news-date">2026 · 문정복·이성윤·박수현</div>
+                </div>
+                <div class="news-arrow">→</div>
+            </a>
+
+            <a class="news-item fade-in" href="https://www.huffingtonpost.kr/article/257883" target="_blank" rel="noopener">
+                <div class="news-src">허프포스트</div>
+                <div class="news-body">
+                    <h4>'1인1표제'가 민주당의 새로운 전선으로 — 이성윤 "당원 주권 원리를 당 안에서 실현"</h4>
+                    <div class="news-date">2025 · 이성윤</div>
+                </div>
+                <div class="news-arrow">→</div>
+            </a>
+
+            <a class="news-item fade-in" href="http://www.newstomato.com/ReadNews.aspx?no=1304109" target="_blank" rel="noopener">
+                <div class="news-src">뉴스토마토</div>
+                <div class="news-body">
+                    <h4>정청래 "1인1표 위해 수많은 피 흘려…당 주인은 당원"</h4>
+                    <div class="news-date">2025 · 정청래</div>
+                </div>
+                <div class="news-arrow">→</div>
+            </a>
+
+            <a class="news-item fade-in" href="https://www.khan.co.kr/article/202511202009001" target="_blank" rel="noopener">
+                <div class="news-src">경향신문</div>
+                <div class="news-body">
+                    <h4>민주당 대의원·권리당원 '1인1표제' 전당원 투표에 87% 찬성</h4>
+                    <div class="news-date">2025.11.20</div>
+                </div>
+                <div class="news-arrow">→</div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ JOIN ═══ -->
+<section id="join">
+    <div class="sec-wrap">
+        <h2>지금 바로 함께하세요</h2>
+        <p class="join-sub">
+            당원주권시대는 당원이 주인이 되는 민주당을 만들기 위한<br>
+            자발적인 당원 운동입니다. 함께하는 사람이 많을수록<br>더 큰 변화를 만들 수 있습니다.
+        </p>
+        <div class="join-box">
+            <h4>📌 참여 전 확인해주세요</h4>
+            <ol>
+                <li>당원 주권 확대를 위한 1인 1표제를 찬성하시는 분</li>
+                <li>더불어민주당의 발전을 진심으로 원하시는 분</li>
+                <li>비방·욕설 없이 건전한 소통 문화를 지킬 수 있는 분</li>
+            </ol>
+        </div>
+        <a href="https://invite.kakao.com/tc/oxjCPbgcmC" class="btn-kakao" target="_blank" rel="noopener" style="font-size:1.05rem; padding:16px 42px;">
+            💬 카카오톡 소통방 입장하기
+        </a>
+
+    </div>
+</section>
+
+<!-- ═══ 동참 모달 ═══ -->
+<div id="joinModal" class="join-modal-overlay" onclick="handleOverlayClick(event)">
+    <div class="join-modal-box">
+        <button class="modal-close" onclick="closeJoinModal()" aria-label="닫기">✕</button>
+        <h3>✅ 찬성 동참 서명</h3>
+        <p class="modal-sub">당원이 주인 되는 민주당을 함께 만들어갑니다</p>
+
+        <form id="joinForm" onsubmit="submitJoin(event)" novalidate>
+            <div class="form-group">
+                <label for="f-name">이름 <span class="req">*</span></label>
+                <input type="text" id="f-name" placeholder="홍길동" required maxlength="20">
+            </div>
+            <div class="form-group">
+                <label>찬성여부 <span class="req">*</span></label>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="f-agree" value="찬성"> 찬성합니다
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="f-agree" value="강력지지"> 강력 지지합니다
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="f-message">응원 메시지 <span class="req">*</span></label>
+                <textarea id="f-message" placeholder="응원의 말씀을 남겨주세요" required maxlength="150" rows="3" oninput="updateCharCount(this)"></textarea>
+                <div class="char-count"><span id="msgLen">0</span>/150</div>
+            </div>
+            <div class="form-group">
+                <label for="f-phone">휴대폰 번호 <span class="req">*</span></label>
+                <input type="tel" id="f-phone" placeholder="010-0000-0000" required maxlength="13" oninput="formatPhone(this)">
+            </div>
+            <div class="form-group">
+                <div class="checkbox-wrap">
+                    <input type="checkbox" id="f-consent" required>
+                    <label for="f-consent">개인정보 수집·이용에 동의합니다 <span class="req">*</span></label>
+                </div>
+                <div class="consent-detail">수집항목: 이름, 전화번호 &nbsp;|&nbsp; 목적: 운동 참여 확인 &nbsp;|&nbsp; 보유기간: 운동 종료 시까지</div>
+            </div>
+            <button type="submit" class="btn-submit" id="submitBtn">서명 제출하기</button>
+            <div id="submitMsg" class="submit-msg"></div>
+        </form>
+    </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+    <div class="footer-name">당원주권을 위한 1인1표시대</div>
+    <p>
+        더불어민주당 당원주권 강화 운동 · 약칭 당원주권시대<br>
+        소통: <a href="https://invite.kakao.com/tc/oxjCPbgcmC" target="_blank" rel="noopener">카카오톡 소통방</a><br>
+        © 2026 당원주권시대. All Rights Reserved.
+    </p>
+</footer>
+
+<script>
+    /* ── 모바일 메뉴 ── */
+    function toggleMenu() { document.getElementById('mobileNav').classList.toggle('open'); }
+    function closeMenu()  { document.getElementById('mobileNav').classList.remove('open'); }
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 10) document.getElementById('mobileNav').classList.remove('open');
+    });
+
+    /* ── 발언 토글 ── */
+    function toggleSpeech(btn) {
+        const list = btn.nextElementSibling;
+        const isOpen = list.classList.contains('open');
+        document.querySelectorAll('.speech-list.open').forEach(el => {
+            el.classList.remove('open');
+            el.previousElementSibling.textContent = '발언 보기 ▼';
+        });
+        if (!isOpen) { list.classList.add('open'); btn.textContent = '발언 닫기 ▲'; }
+    }
+
+    /* ── 스크롤 페이드인 ── */
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    /* ══════════════════════════════════════════
+       구글 시트 자동 연동
+       시트 ID: 1P6lTWDU_iuCdOvu9_VefeQwfAdO9OYsmsXemsrQCEz8
+       역할 입력 규칙:
+         당대표 후보  → "당대표 후보" 포함
+         최고위원 후보 → "최고위원 후보" 포함
+         그 외       → 일반 의원으로 분류
+    ══════════════════════════════════════════ */
+    const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTK_Wf4cYH0nOAQv1NYQmLAgZEpeWjayn1FIjnAVd7hLthplCMoWJ-RJMQ5d9-LXc2-yYdn7OAjU76l/pub?gid=0&single=true&output=csv';
+
+    /* CSV 파싱 (따옴표·줄바꿈 처리 포함) */
+    function parseCSV(text) {
+        const rows = []; let row = [], field = '', inQ = false;
+        for (let i = 0; i < text.length; i++) {
+            const c = text[i];
+            if (inQ) {
+                if (c === '"' && text[i+1] === '"') { field += '"'; i++; }
+                else if (c === '"') inQ = false;
+                else field += c;
+            } else {
+                if (c === '"') inQ = true;
+                else if (c === ',') { row.push(field); field = ''; }
+                else if (c === '\n' || (c === '\r' && text[i+1] === '\n')) {
+                    row.push(field); field = '';
+                    if (row.some(v => v)) rows.push(row);
+                    row = []; if (c === '\r') i++;
+                } else field += c;
+            }
+        }
+        if (field || row.length) { row.push(field); if (row.some(v => v)) rows.push(row); }
+        return rows;
+    }
+
+    /* 카드 HTML 생성 */
+    function buildCard(m) {
+        const badge = m.status === '찬성'   ? '<div class="status-badge agree">✅ 찬성</div>'
+                    : m.status === '유보'   ? '<div class="status-badge hold">⚠️ 유보</div>'
+                    :                         '<div class="status-badge unknown">❓ 확인불가</div>';
+
+        const speechLabel = m.status === '찬성'
+            ? `💬 찬성 발언 ${m.speeches.length}건 확인`
+            : m.status === '유보'
+            ? `💬 유보 발언 ${m.speeches.length}건`
+            : '🔍 공개 발언 미확인';
+        const speechClass = m.status === '찬성' ? '' : 'pending';
+
+        const items = m.speeches.length
+            ? m.speeches.map(s => `
+                <div class="sp-item">
+                    "${s.content}"
+                    <a href="${s.link}" target="_blank" rel="noopener">${s.source} ${s.date} →</a>
+                </div>`).join('')
+            : '<div class="sp-item">공개 발언이 확인되지 않았습니다.</div>';
+
+        const avatarInner = m.photo
+            ? `<img src="${m.photo}" alt="${m.name}" onerror="this.parentNode.innerHTML='${m.name.charAt(0)}'">`
+            : m.name.charAt(0);
+
+        return `
+        <div class="m-card fade-in">
+            <div class="avatar">${avatarInner}</div>
+            <div class="m-name">${m.name}</div>
+            <div class="m-district">${m.district}</div>
+            <div class="m-term">${m.term}${m.role ? ' · ' + m.role : ''}</div>
+            ${badge}
+            <div class="m-speeches ${speechClass}">${speechLabel}</div>
+            <button class="speech-btn" onclick="toggleSpeech(this)">발언 보기 ▼</button>
+            <div class="speech-list">${items}</div>
+        </div>`;
+    }
+
+    /* 그리드 렌더링 */
+    function renderGrid(gridId, cntId, members, emptyMsg) {
+        const grid = document.getElementById(gridId);
+        const cnt  = document.getElementById(cntId);
+        if (!members.length) {
+            cnt.textContent  = emptyMsg;
+            grid.innerHTML   = `<p class="load-msg">${emptyMsg}</p>`;
+            return;
+        }
+        cnt.textContent = members.length + '명';
+        grid.innerHTML  = members.map(buildCard).join('');
+        grid.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    }
+
+    /* 시트 로드 & 렌더 */
+    async function loadMembers() {
+        try {
+            const res  = await fetch(CSV_URL);
+            const text = await res.text();
+            const rows = parseCSV(text);
+            if (rows.length < 2) {
+                ['grid-leader','grid-supreme','grid-general'].forEach(id => {
+                    document.getElementById(id).innerHTML =
+                        '<p class="load-msg">📋 시트에 데이터를 입력해주세요.</p>';
+                });
+                ['cnt-leader','cnt-supreme','cnt-general'].forEach(id => {
+                    document.getElementById(id).textContent = '0명';
+                });
+                return;
+            }
+
+            const headers = rows[0].map(h => h.trim());
+            const data    = rows.slice(1).map(row => {
+                const obj = {};
+                headers.forEach((h, i) => obj[h] = (row[i] || '').trim());
+                return obj;
+            }).filter(r => r['이름']);
+
+            /* 이름별로 그룹화 (발언 여러 건 처리) */
+            const map = new Map();
+            data.forEach(r => {
+                const key = r['이름'];
+                if (!map.has(key)) {
+                    // 사진URL: 시트 직접 입력 → dept_cd 자동 생성 → 없으면 null
+                    const photoUrl = r['사진URL'] ||
+                        (r['dept_cd'] ? `https://www.assembly.go.kr/photo/${r['dept_cd']}.jpg` : null);
+                    map.set(key, {
+                        name: r['이름'], district: r['지역구'],
+                        term: r['선수'], role: r['역할'],
+                        status: r['상태'], photo: photoUrl, speeches: []
+                    });
+                }
+                if (r['발언내용']) {
+                    map.get(key).speeches.push({
+                        content: r['발언내용'], link: r['발언링크'],
+                        source: r['발언언론사'], date: r['발언날짜']
+                    });
+                }
+            });
+
+            const all      = Array.from(map.values());
+            const leaders  = all.filter(m => m.role.includes('당대표 후보'))
+                               .sort((a, b) => a.name.localeCompare(b.name, 'ko'));
+            const supreme  = all.filter(m => m.role.includes('최고위원 후보'))
+                               .sort((a, b) => a.name.localeCompare(b.name, 'ko'));
+            const general  = all.filter(m => !m.role.includes('당대표 후보') && !m.role.includes('최고위원 후보'))
+                               .sort((a, b) => a.name.localeCompare(b.name, 'ko'));
+
+            renderGrid('grid-leader',  'cnt-leader',  leaders, '데이터를 입력해주세요');
+            renderGrid('grid-supreme', 'cnt-supreme', supreme, '후보 확정 후 업데이트됩니다');
+            renderGrid('grid-general', 'cnt-general', general, '데이터를 입력해주세요');
+
+        } catch (err) {
+            console.warn('시트 로드 실패 — 시트가 웹에 게시되었는지 확인하세요:', err);
+            ['grid-leader','grid-supreme','grid-general'].forEach(id => {
+                document.getElementById(id).innerHTML =
+                    '<p class="load-msg">⚠️ 시트 연결 오류. 구글 시트 공개 배포 설정을 확인하세요.</p>';
+            });
+            ['cnt-leader','cnt-supreme','cnt-general'].forEach(id => {
+                document.getElementById(id).textContent = '연결 오류';
+            });
+        }
+    }
+
+    loadMembers();
+
+    /* ══════════════════════════════════════
+       동참 서명 기능
+    ══════════════════════════════════════ */
+
+    // 참여자 데이터 읽기용 CSV URL
+    const SUPPORTERS_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR65mamJ1uMlqc57UC7FLahWOYehNc1QhepaXxTt6_n8106lcYgL_Yes8YNk76ocyExzREpYGF5Ayfe/pub?gid=0&single=true&output=csv';
+
+    // !! 아래 URL을 Google Apps Script 배포 URL로 교체하세요 !!
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwyRIE7FriQmBWCcItwVUn4nBOvvXLQCKJ5i4o1-2v29-np72Rx5BoiJRt1Aai4iBog0Q/exec';
+
+    const GOAL = 10000;
+
+    // 욕설 필터
+    const NEGATIVE_PATTERNS = [
+        /시발|씨발|씨팔|ㅅㅂ/,
+        /새끼|색끼|쌔끼|셰끼/,
+        /개새끼|개색끼|개쌔끼/,
+        /병신|ㅂㅅ/,
+        /지랄|ㅈㄹ/,
+        /꺼져|꺼지세요/,
+        /죽어|죽여/,
+        /닥쳐|닥치/,
+        /미친|미쳤|ㅁㅊ/,
+        /존나|ㅈㄴ/,
+        /fuck|shit|bitch|asshole|damn|bastard/i,
+        /애미|에미|느금마|니애미/,
+        /보지|자지|씹|존나|좆/
+    ];
+
+    function hasNegativeContent(text) {
+        return NEGATIVE_PATTERNS.some(p => p.test(text));
+    }
+
+    // 이름 유효성: 완전한 한글 음절(가-힣) + 영문, 최소 2자, 자음/모음 단독 불가
+    function isValidName(name) {
+        if (name.length < 2) return false;
+        // 자음 단독(ㄱ-ㅎ) 또는 모음 단독(ㅏ-ㅣ) 포함 여부
+        if (/[ㄱ-ㅎㅏ-ㅣ]/.test(name)) return false;
+        // 한글 또는 영문만 허용
+        if (!/^[가-힣a-zA-Z\s]+$/.test(name)) return false;
+        return true;
+    }
+
+    // 전화번호 유효성: 모든 자리가 같은 숫자이면 불가 (000-0000-0000 등)
+    function isValidPhone(phone) {
+        const digits = phone.replace(/\D/g, '');
+        if (digits.length < 10) return false;
+        // 모든 자리가 동일한 숫자인지 확인
+        if (/^(\d)\1+$/.test(digits)) return false;
+        return true;
+    }
+
+    // CSV 파서
+    function parseCSV(text) {
+        const lines = text.trim().split('\n');
+        if (lines.length < 2) return [];
+        const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
+        return lines.slice(1).map(line => {
+            const cols = [];
+            let cur = '', inQ = false;
+            for (const ch of line) {
+                if (ch === '"') { inQ = !inQ; }
+                else if (ch === ',' && !inQ) { cols.push(cur.trim()); cur = ''; }
+                else cur += ch;
+            }
+            cols.push(cur.trim());
+            const obj = {};
+            headers.forEach((h, i) => obj[h] = (cols[i] || '').replace(/^"|"$/g, ''));
+            return obj;
+        });
+    }
+
+    // 숫자 카운트 애니메이션
+    function animateCount(elId, target) {
+        const el = document.getElementById(elId);
+        if (!el) return;
+        const duration = 1400;
+        const tick = 16;
+        const steps = duration / tick;
+        let cur = 0;
+        const step = target / steps;
+        const timer = setInterval(() => {
+            cur = Math.min(cur + step, target);
+            el.textContent = Math.floor(cur).toLocaleString();
+            if (cur >= target) clearInterval(timer);
+        }, tick);
+    }
+
+    // 이름 마스킹
+    function maskName(name) {
+        if (!name) return '익명';
+        if (name.length === 1) return name + '*';
+        return name[0] + '*'.repeat(Math.max(1, name.length - 1));
+    }
+
+    // 롤링 메시지 시작
+    function startTicker(messages) {
+        const track = document.getElementById('tickerCards');
+        if (!track) return;
+        if (messages.length === 0) {
+            track.innerHTML = '<div class="ticker-card" style="opacity:0.5;"><span class="ticker-msg">첫 번째 동참자가 되어주세요! 💪</span></div>';
+            return;
+        }
+        // 무한 루프를 위해 2배 복제
+        const doubled = [...messages, ...messages];
+        track.innerHTML = doubled.map(m =>
+            `<div class="ticker-card">
+                <span class="ticker-name">${maskName(m.name)}</span>
+                <span class="ticker-msg">${m.msg.replace(/</g,'&lt;')}</span>
+            </div>`
+        ).join('');
+        const duration = Math.max(messages.length * 4, 20);
+        track.style.animationDuration = duration + 's';
+    }
+
+    // 참여자 데이터 로드 (Apps Script GET → CORS 문제 없음)
+    async function loadSupporters() {
+        try {
+            const res = await fetch(APPS_SCRIPT_URL + '?_t=' + Date.now());
+            const text = await res.text();
+            console.log('[DEBUG] Apps Script 응답:', text.substring(0, 500));
+            let json;
+            try { json = JSON.parse(text); } catch(pe) {
+                console.error('[DEBUG] JSON 파싱 실패:', pe, text.substring(0,200));
+                startTicker([]); return;
+            }
+            const rows = json.rows || [];
+            console.log('[DEBUG] rows 개수:', rows.length, '첫행 키:', rows[0] ? Object.keys(rows[0]) : 'none');
+            const count = rows.length;
+
+            animateCount('supporterCount', count);
+
+            const pct = Math.min(Math.round(count / GOAL * 100), 100);
+            const bar = document.getElementById('goalBar');
+            if (bar) setTimeout(() => { bar.style.width = pct + '%'; }, 100);
+            const pctEl = document.getElementById('goalPct');
+            if (pctEl) pctEl.textContent = pct;
+
+            const msgs = rows
+                .map(r => {
+                    // 헤더명 공백 무관하게 동적 탐색
+                    const nameKey = Object.keys(r).find(k => k.trim() === '이름');
+                    const msgKey  = Object.keys(r).find(k => k.replace(/\s/g,'') === '응원메시지');
+                    const name = (nameKey ? r[nameKey] : '') || '';
+                    const msg  = (msgKey  ? r[msgKey]  : '') || '동참합니다!';
+                    return { name, msg };
+                })
+                .filter(m => m.name && m.name.trim());
+            console.log('[DEBUG] msgs 개수:', msgs.length);
+            const finalMsgs = msgs.reverse().slice(0, 80);
+
+            startTicker(finalMsgs);
+        } catch (e) {
+            console.error('[DEBUG] loadSupporters 에러:', e);
+            const el = document.getElementById('supporterCount');
+            if (el) el.textContent = '?';
+            startTicker([]);
+        }
+    }
+
+    // 모달 열기/닫기
+    function openJoinModal() {
+        document.getElementById('joinModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+        document.getElementById('submitMsg').textContent = '';
+        document.getElementById('submitMsg').className = 'submit-msg';
+    }
+    function closeJoinModal() {
+        document.getElementById('joinModal').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    function handleOverlayClick(e) {
+        if (e.target.id === 'joinModal') closeJoinModal();
+    }
+
+    // 전화번호 자동 하이픈
+    function formatPhone(el) {
+        let v = el.value.replace(/\D/g, '').slice(0, 11);
+        if (v.length >= 8) v = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7);
+        else if (v.length >= 4) v = v.slice(0,3) + '-' + v.slice(3);
+        el.value = v;
+    }
+
+    // 글자 수 카운트
+    function updateCharCount(el) {
+        document.getElementById('msgLen').textContent = el.value.length;
+    }
+
+    // 폼 제출
+    async function submitJoin(e) {
+        e.preventDefault();
+        const msgEl   = document.getElementById('submitMsg');
+        const btn     = document.getElementById('submitBtn');
+
+        const name    = document.getElementById('f-name').value.trim();
+        const agree   = document.querySelector('input[name="f-agree"]:checked')?.value || '';
+        const message = document.getElementById('f-message').value.trim();
+        const phone   = document.getElementById('f-phone').value.trim();
+        const consent = document.getElementById('f-consent').checked;
+
+        // 유효성 검사
+        if (!name)    { showMsg('error', '이름을 입력해주세요.'); return; }
+        if (!isValidName(name)) {
+            showMsg('error', '이름을 올바르게 입력해주세요. (완전한 한글 2자 이상, 자음/모음 단독 불가)');
+            return;
+        }
+        if (!agree)   { showMsg('error', '찬성여부를 선택해주세요.'); return; }
+        if (!message) { showMsg('error', '응원 메시지를 입력해주세요.'); return; }
+        if (hasNegativeContent(message)) {
+            showMsg('error', '응원 메시지에 욕설 또는 비속어가 포함되어 있습니다. 수정 후 다시 시도해주세요.');
+            return;
+        }
+        if (!phone || !isValidPhone(phone)) {
+            showMsg('error', '올바른 휴대폰 번호를 입력해주세요. (실제 번호로 입력해주세요)');
+            return;
+        }
+        if (!consent) { showMsg('error', '개인정보 수집·이용에 동의해주세요.'); return; }
+
+        btn.disabled = true;
+        btn.textContent = '제출 중...';
+        msgEl.textContent = '';
+
+        const now = new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
+        const payload = {
+            입력일시: now,
+            이름: name,
+            찬성여부: agree,
+            응원메시지: message,
+            휴대폰번호: phone,
+            개인정보활용동의: '동의'
+        };
+
+        if (APPS_SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL_HERE') {
+            // 아직 미설정 → UI 동작 확인용 성공 처리
+            await new Promise(r => setTimeout(r, 800));
+            onSubmitSuccess();
+        } else {
+            try {
+                await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify(payload),
+                    mode: 'no-cors'  // opaque response — 전송은 정상 처리됨
+                });
+                onSubmitSuccess();
+            } catch (err) {
+                showMsg('error', '전송 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+            }
+        }
+
+        btn.disabled = false;
+        btn.textContent = '서명 제출하기';
+
+        function onSubmitSuccess() {
+            showMsg('success', '✅ 동참 서명이 완료되었습니다! 감사합니다.');
+            document.getElementById('joinForm').reset();
+            document.getElementById('msgLen').textContent = '0';
+            setTimeout(() => { closeJoinModal(); loadSupporters(); }, 2200);
+        }
+        function showMsg(type, text) {
+            msgEl.className = 'submit-msg ' + type;
+            msgEl.textContent = text;
+        }
+    }
+
+    // 초기 로드
+    loadSupporters();
+</script>
+</body>
+</html>
