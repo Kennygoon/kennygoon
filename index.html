@@ -1715,12 +1715,12 @@
         track.style.animationDuration = duration + 's';
     }
 
-    // 참여자 데이터 로드
+    // 참여자 데이터 로드 (Apps Script GET → CORS 문제 없음)
     async function loadSupporters() {
         try {
-            const res = await fetch(SUPPORTERS_CSV + '&_t=' + Date.now());
-            const text = await res.text();
-            const rows = parseCSV(text);
+            const res = await fetch(APPS_SCRIPT_URL + '?_t=' + Date.now());
+            const json = await res.json();
+            const rows = json.rows || [];
             const count = rows.length;
 
             animateCount('supporterCount', count);
@@ -1732,21 +1732,20 @@
             if (pctEl) pctEl.textContent = pct;
 
             const msgs = rows
-                .filter(r => {
-                    const m = r['응원 메시지'] || r['응원메시지'] || '';
-                    return m.length > 1;
+                .filter(r => r['이름'])
+                .map(r => {
+                    // 헤더명에 공백 있는 경우 포함해서 모든 키를 시도
+                    const msgKey = Object.keys(r).find(k => k.replace(/\s/g,'') === '응원메시지');
+                    const msg = (msgKey ? r[msgKey] : '') || '동참합니다!';
+                    return { name: r['이름'] || '익명', msg };
                 })
-                .map(r => ({
-                    name: r['이름'] || '익명',
-                    msg: r['응원 메시지'] || r['응원메시지'] || ''
-                }))
                 .reverse()   // 최신 글이 맨 앞
                 .slice(0, 80);
 
             startTicker(msgs);
         } catch (e) {
             const el = document.getElementById('supporterCount');
-            if (el) el.textContent = '0';
+            if (el) el.textContent = '?';
             startTicker([]);
         }
     }
