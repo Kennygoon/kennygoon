@@ -1670,13 +1670,42 @@
 
     // 욕설 필터
     const NEGATIVE_PATTERNS = [
-        /시발|씨발|씨팔|ㅅㅂ/, /개새끼|개색끼|개쌔끼/, /병신|ㅂㅅ/,
-        /지랄|ㅈㄹ/, /꺼져|꺼지세요/, /죽어|죽여/, /닥쳐|닥치/,
-        /미친|미쳤|ㅁㅊ/, /존나|ㅈㄴ/, /fuck|shit|bitch|asshole/i
+        /시발|씨발|씨팔|ㅅㅂ/,
+        /새끼|색끼|쌔끼|셰끼/,
+        /개새끼|개색끼|개쌔끼/,
+        /병신|ㅂㅅ/,
+        /지랄|ㅈㄹ/,
+        /꺼져|꺼지세요/,
+        /죽어|죽여/,
+        /닥쳐|닥치/,
+        /미친|미쳤|ㅁㅊ/,
+        /존나|ㅈㄴ/,
+        /fuck|shit|bitch|asshole|damn|bastard/i,
+        /애미|에미|느금마|니애미/,
+        /보지|자지|씹|존나|좆/
     ];
 
     function hasNegativeContent(text) {
         return NEGATIVE_PATTERNS.some(p => p.test(text));
+    }
+
+    // 이름 유효성: 완전한 한글 음절(가-힣) + 영문, 최소 2자, 자음/모음 단독 불가
+    function isValidName(name) {
+        if (name.length < 2) return false;
+        // 자음 단독(ㄱ-ㅎ) 또는 모음 단독(ㅏ-ㅣ) 포함 여부
+        if (/[ㄱ-ㅎㅏ-ㅣ]/.test(name)) return false;
+        // 한글 또는 영문만 허용
+        if (!/^[가-힣a-zA-Z\s]+$/.test(name)) return false;
+        return true;
+    }
+
+    // 전화번호 유효성: 모든 자리가 같은 숫자이면 불가 (000-0000-0000 등)
+    function isValidPhone(phone) {
+        const digits = phone.replace(/\D/g, '');
+        if (digits.length < 10) return false;
+        // 모든 자리가 동일한 숫자인지 확인
+        if (/^(\d)\1+$/.test(digits)) return false;
+        return true;
     }
 
     // CSV 파서
@@ -1829,14 +1858,18 @@
 
         // 유효성 검사
         if (!name)    { showMsg('error', '이름을 입력해주세요.'); return; }
+        if (!isValidName(name)) {
+            showMsg('error', '이름을 올바르게 입력해주세요. (완전한 한글 2자 이상, 자음/모음 단독 불가)');
+            return;
+        }
         if (!agree)   { showMsg('error', '찬성여부를 선택해주세요.'); return; }
         if (!message) { showMsg('error', '응원 메시지를 입력해주세요.'); return; }
         if (hasNegativeContent(message)) {
-            showMsg('error', '응원 메시지에 욕설이 포함되어 있습니다. 수정 후 다시 시도해주세요.');
+            showMsg('error', '응원 메시지에 욕설 또는 비속어가 포함되어 있습니다. 수정 후 다시 시도해주세요.');
             return;
         }
-        if (!phone || phone.replace(/\D/g,'').length < 10) {
-            showMsg('error', '올바른 휴대폰 번호를 입력해주세요.');
+        if (!phone || !isValidPhone(phone)) {
+            showMsg('error', '올바른 휴대폰 번호를 입력해주세요. (실제 번호로 입력해주세요)');
             return;
         }
         if (!consent) { showMsg('error', '개인정보 수집·이용에 동의해주세요.'); return; }
