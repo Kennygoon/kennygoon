@@ -1588,17 +1588,17 @@
     async function loadMembers() {
         try {
             /* Apps Script 프록시 경유 (CORS 리다이렉트 우회) */
-            const proxyUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTK_Wf4cYH0nOAQv1NYQmLAgZEpeWjayn1FIjnAVd7hLthplCMoWJ-RJMQ5d9-LXc2-yYdn7OAjU76l/pub?output=csv&_t=' + Date.now();
+            const proxyUrl = APPS_SCRIPT_URL + '?action=members&_t=' + Date.now();
             let text;
             try {
                 const res = await fetch(proxyUrl);
-                const json = { csv: await res.text() };
-                
+                const json = await res.json();
+                if (json.error) throw new Error(json.error);
                 text = json.csv;
             } catch(proxyErr) {
                 /* 프록시 실패 시 직접 fetch 시도 */
                 console.warn('[loadMembers] 프록시 실패, 직접 fetch 시도:', proxyErr);
-                const res2 = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vTK_Wf4cYH0nOAQv1NYQmLAgZEpeWjayn1FIjnAVd7hLthplCMoWJ-RJMQ5d9-LXc2-yYdn7OAjU76l/pub?output=csv');
+                const res2 = await fetch(CSV_URL);
                 text = await res2.text();
             }
             const rows = parseCSV(text);
@@ -1929,4 +1929,12 @@
         }
         function showMsg(type, text) {
             msgEl.className = 'submit-msg ' + type;
-            msgEl.textC
+            msgEl.textContent = text;
+        }
+    }
+
+    // 초기 로드
+    loadSupporters();
+</script>
+</body>
+</html>
