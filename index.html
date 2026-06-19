@@ -1598,7 +1598,7 @@
             } catch(proxyErr) {
                 /* 프록시 실패 시 직접 fetch 시도 */
                 console.warn('[loadMembers] 프록시 실패, 직접 fetch 시도:', proxyErr);
-                const res2 = await fetch(CSV_URL);
+                const res2 = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vTK_Wf4cYH0nOAQv1NYQmLAgZEpeWjayn1FIjnAVd7hLthplCMoWJ-RJMQ5d9-LXc2-yYdn7OAjU76l/pub?output=csv');
                 text = await res2.text();
             }
             const rows = parseCSV(text);
