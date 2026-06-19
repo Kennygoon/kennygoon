@@ -1732,13 +1732,15 @@
             if (pctEl) pctEl.textContent = pct;
 
             const msgs = rows
-                .filter(r => r['이름'])
                 .map(r => {
-                    // 헤더명에 공백 있는 경우 포함해서 모든 키를 시도
-                    const msgKey = Object.keys(r).find(k => k.replace(/\s/g,'') === '응원메시지');
-                    const msg = (msgKey ? r[msgKey] : '') || '동참합니다!';
-                    return { name: r['이름'] || '익명', msg };
+                    // 헤더명 공백 무관하게 동적 탐색
+                    const nameKey = Object.keys(r).find(k => k.trim() === '이름');
+                    const msgKey  = Object.keys(r).find(k => k.replace(/\s/g,'') === '응원메시지');
+                    const name = (nameKey ? r[nameKey] : '') || '';
+                    const msg  = (msgKey  ? r[msgKey]  : '') || '동참합니다!';
+                    return { name, msg };
                 })
+                .filter(m => m.name)
                 .reverse()   // 최신 글이 맨 앞
                 .slice(0, 80);
 
