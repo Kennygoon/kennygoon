@@ -1940,7 +1940,124 @@
             animateCount('supporterCount', count);
 
             const pct = Math.min(Math.round(count / GOAL * 100), 100);
+         
             const bar = document.getElementById('goalBar');
+            if (bar) setTimeout(() => { bar.style.width = pct + '%'; }, 100);
+            const pctEl = document.getElementById('goalPct');
+            if (pctEl) pctEl.textContent = pct;
+
+            const messages = rows
+                .filter(r => r['응원메시지'] && r['이름'])
+                .map(r => ({ name: r['이름'], msg: r['응원메시지'] }));
+            startTicker(messages);
+
+        } catch(err) {
+            console.error('[DEBUG] loadSupporters 에러:', err);
+            startTicker([]);
+        }
+    }
+
+    loadSupporters();
+
+    /* ══════════════════════════════════════
+       동참 모달 열기/닫기
+    ══════════════════════════════════════ */
+    function openJoinModal() {
+        document.getElementById('joinModal').classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeJoinModal() {
+        document.getElementById('joinModal').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+    function handleOverlayClick(e) {
+        if (e.target === document.getElementById('joinModal')) closeJoinModal();
+    }
+
+    /* ══════════════════════════════════════
+       입력 헬퍼
+    ══════════════════════════════════════ */
+    function updateCharCount(el) {
+        document.getElementById('msgLen').textContent = el.value.length;
+    }
+    function formatPhone(el) {
+        let v = el.value.replace(/\D/g,'');
+        if (v.length <= 3) el.value = v;
+        else if (v.length <= 7) el.value = v.slice(0,3) + '-' + v.slice(3);
+        else el.value = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7,11);
+    }
+
+    /* ══════════════════════════════════════
+       동참 서명 제출
+    ══════════════════════════════════════ */
+    async function submitJoin(e) {
+        e.preventDefault();
+        const btn = document.getElementById('submitBtn');
+        const msg = document.getElementById('submitMsg');
+
+        const name    = document.getElementById('f-name').value.trim();
+        const agree   = document.querySelector('input[name="f-agree"]:checked')?.value || '';
+        const message = document.getElementById('f-message').value.trim();
+        const phone   = document.getElementById('f-phone').value.trim();
+        const consent = document.getElementById('f-consent').checked;
+
+        if (!name || !agree || !message || !phone || !consent) {
+            msg.textContent = '필수 항목을 모두 입력/선택해주세요.';
+            msg.style.color = '#EF4444';
+            return;
+        }
+        if (!isValidName(name)) {
+            msg.textContent = '이름을 바르게 입력해주세요 (2자 이상 한글/영문).';
+            msg.style.color = '#EF4444';
+            return;
+        }
+        if (!isValidPhone(phone)) {
+            msg.textContent = '올바른 휴대폰 번호를 입력해주세요.';
+            msg.style.color = '#EF4444';
+            return;
+        }
+        if (hasNegativeContent(message)) {
+            msg.textContent = '부적절한 표현이 포함되어 있습니다.';
+            msg.style.color = '#EF4444';
+            return;
+        }
+
+        btn.disabled = true;
+        btn.textContent = '제출 중…';
+        msg.textContent = '';
+
+        try {
+            const body = JSON.stringify({ action:'addRow', name, agree, message, phone });
+            const res  = await fetch(APPS_SCRIPT_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body
+            });
+            const json = await res.json();
+            if (json.result === 'ok') {
+                msg.textContent = '✅ 동참해주셔서 감사합니다!';
+                msg.style.color = '#10B981';
+                document.getElementById('joinForm').reset();
+                document.getElementById('msgLen').textContent = '0';
+                setTimeout(closeJoinModal, 2200);
+                loadSupporters();
+            } else {
+                throw new Error(json.error || '서버 오류');
+            }
+        } catch(err) {
+            msg.textContent = '오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
+            msg.style.color = '#EF4444';
+            console.error('[submitJoin]', err);
+        } finally {
+            btn.disabled = false;
+            btn.textContent = '서명 제출하기';
+        }
+    }
+
+</script>
+</body>
+</html>
+  const bar = document.getElementById('goalBar');
             if (bar) setTimeout(() => { bar.style.width = pct + '%'; }, 100);
             const pctEl = document.getElementById('goalPct');
             if (pctEl) pctEl.textContent = pct;
