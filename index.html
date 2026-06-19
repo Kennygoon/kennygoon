@@ -1588,7 +1588,7 @@
     async function loadMembers() {
         try {
             /* Apps Script 프록시 경유 (CORS 리다이렉트 우회) */
-            const proxyUrl = APPS_SCRIPT_URL + '?action=members&_t=' + Date.now();
+            const proxyUrl = 'https://script.google.com/macros/s/AKfycbwyRIE7FriQmBWCcItwVUn4nBOvvXLQCKJ5i4o1-2v29-np72Rx5BoiJRt1Aai4iBog0Q/exec' + '?action=members&_t=' + Date.now();
             let text;
             try {
                 const res = await fetch(proxyUrl);
