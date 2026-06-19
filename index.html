@@ -1587,8 +1587,20 @@
     /* 시트 로드 & 렌더 */
     async function loadMembers() {
         try {
-            const res  = await fetch(CSV_URL);
-            const text = await res.text();
+            /* Apps Script 프록시 경유 (CORS 리다이렉트 우회) */
+            const proxyUrl = APPS_SCRIPT_URL + '?action=members&_t=' + Date.now();
+            let text;
+            try {
+                const res = await fetch(proxyUrl);
+                const json = await res.json();
+                if (json.error) throw new Error(json.error);
+                text = json.csv;
+            } catch(proxyErr) {
+                /* 프록시 실패 시 직접 fetch 시도 */
+                console.warn('[loadMembers] 프록시 실패, 직접 fetch 시도:', proxyErr);
+                const res2 = await fetch(CSV_URL);
+                text = await res2.text();
+            }
             const rows = parseCSV(text);
             if (rows.length < 2) {
                 ['grid-leader','grid-supreme','grid-general'].forEach(id => {
