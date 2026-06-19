@@ -866,6 +866,23 @@
             transform: translateY(-3px);
             box-shadow: 0 10px 36px rgba(0,154,78,0.55);
         }
+        /* 히어로 아래 롤링 메시지 섹션 */
+        .ticker-hero-section {
+            background: linear-gradient(180deg, #0d2a6b 0%, #0a3d7c 100%);
+            padding: 28px 20px 36px;
+            width: 100%;
+        }
+        .ticker-hero-section .ticker-title {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.55);
+            margin-bottom: 12px;
+            text-align: center;
+            letter-spacing: 0.3px;
+        }
+        .ticker-hero-section .ticker-window {
+            max-width: 680px;
+            margin: 0 auto;
+        }
         /* 롤링 메시지 */
         .ticker-section {
             width: 100%;
@@ -1087,6 +1104,14 @@
                 <span class="stat-lbl">더불어민주당 권리당원</span>
             </div>
         </div>
+    </div>
+</section>
+
+<!-- ═══ 응원 메시지 롤링 ═══ -->
+<section class="ticker-hero-section">
+    <div class="ticker-title">💬 동참자 응원의 목소리</div>
+    <div class="ticker-window">
+        <div class="ticker-cards" id="tickerCards"></div>
     </div>
 </section>
 
@@ -1382,13 +1407,6 @@
             ✅ 찬성 동참하기
         </button>
 
-        <!-- 롤링 응원 메시지 -->
-        <div class="ticker-section">
-            <div class="ticker-title">💬 동참자 응원의 목소리</div>
-            <div class="ticker-window">
-                <div class="ticker-cards" id="tickerCards"></div>
-            </div>
-        </div>
     </div>
 </section>
 
