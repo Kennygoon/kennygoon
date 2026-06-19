@@ -1641,16 +1641,11 @@
 
     const GOAL = 10000;
 
-    // 부정적 내용 필터 (1인1표에 반대하는 메시지 차단)
+    // 욕설 필터
     const NEGATIVE_PATTERNS = [
-        /반대/, /절대\s*안/, /폐지/, /없애/, /나쁜/, /나쁘다/, /나쁩니다/,
-        /틀렸/, /잘못됐/, /잘못된/, /잘못\s*됩니다/,
-        /사기/, /거짓/, /조작/, /가짜/,
-        /하지\s*마/, /그만해/, /그만둬/, /그만하/,
-        /싫어/, /싫습니다/, /싫다/,
-        /안\s*된다/, /안\s*됩니다/, /안\s*돼/, /안돼/,
-        /반발/, /저항해야/, /반박/,
-        /필요\s*없/, /쓸모없/, /의미없/
+        /시발|씨발|씨팔|ㅅㅂ/, /개새끼|개색끼|개쌔끼/, /병신|ㅂㅅ/,
+        /지랄|ㅈㄹ/, /꺼져|꺼지세요/, /죽어|죽여/, /닥쳐|닥치/,
+        /미친|미쳤|ㅁㅊ/, /존나|ㅈㄴ/, /fuck|shit|bitch|asshole/i
     ];
 
     function hasNegativeContent(text) {
@@ -1700,22 +1695,16 @@
         return name[0] + '*'.repeat(Math.max(1, name.length - 1));
     }
 
-    // 기본 메시지 (데이터 없을 때 표시)
-    const DEFAULT_MESSAGES = [
-        { name: '권리당원', msg: '당원이 주인인 민주당을 만들어 갑시다!' },
-        { name: '당원A', msg: '1인1표는 민주주의의 기본입니다. 반드시 실현됩니다!' },
-        { name: '평당원B', msg: '우리 모두의 한 표가 진짜 민주주의입니다.' },
-        { name: '당원C', msg: '함께하면 반드시 바꿀 수 있습니다. 힘냅시다!' },
-        { name: '권리당원D', msg: '당원주권시대를 응원합니다!' },
-    ];
-
     // 롤링 메시지 시작
     function startTicker(messages) {
         const track = document.getElementById('tickerCards');
         if (!track) return;
-        const list = messages.length > 0 ? messages : DEFAULT_MESSAGES;
+        if (messages.length === 0) {
+            track.innerHTML = '<div class="ticker-card" style="opacity:0.5;"><span class="ticker-msg">첫 번째 동참자가 되어주세요! 💪</span></div>';
+            return;
+        }
         // 무한 루프를 위해 2배 복제
-        const doubled = [...list, ...list];
+        const doubled = [...messages, ...messages];
         track.innerHTML = doubled.map(m =>
             `<div class="ticker-card">
                 <span class="ticker-name">${maskName(m.name)}</span>
@@ -1743,9 +1732,16 @@
             if (pctEl) pctEl.textContent = pct;
 
             const msgs = rows
-                .filter(r => r['응원메시지'] && r['응원메시지'].length > 1)
-                .map(r => ({ name: r['이름'] || '익명', msg: r['응원메시지'] }))
-                .slice(-80); // 최근 80개
+                .filter(r => {
+                    const m = r['응원 메시지'] || r['응원메시지'] || '';
+                    return m.length > 1;
+                })
+                .map(r => ({
+                    name: r['이름'] || '익명',
+                    msg: r['응원 메시지'] || r['응원메시지'] || ''
+                }))
+                .reverse()   // 최신 글이 맨 앞
+                .slice(0, 80);
 
             startTicker(msgs);
         } catch (e) {
@@ -1800,7 +1796,7 @@
         if (!agree)   { showMsg('error', '찬성여부를 선택해주세요.'); return; }
         if (!message) { showMsg('error', '응원 메시지를 입력해주세요.'); return; }
         if (hasNegativeContent(message)) {
-            showMsg('error', '응원 메시지에 부적절한 내용이 포함되어 있습니다. 수정 후 다시 시도해주세요.');
+            showMsg('error', '응원 메시지에 욕설이 포함되어 있습니다. 수정 후 다시 시도해주세요.');
             return;
         }
         if (!phone || phone.replace(/\D/g,'').length < 10) {
