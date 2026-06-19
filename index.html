@@ -1711,7 +1711,7 @@
                 <span class="ticker-msg">${m.msg.replace(/</g,'&lt;')}</span>
             </div>`
         ).join('');
-        const duration = Math.max(list.length * 4, 20);
+        const duration = Math.max(messages.length * 4, 20);
         track.style.animationDuration = duration + 's';
     }
 
