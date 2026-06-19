@@ -588,6 +588,23 @@
         .status-badge.hold   { background: #FFF8E1; color: #E65100; }
         .status-badge.unknown{ background: #F3F4F6; color: #6B7280; }
 
+        /* 제보 버튼 */
+        .tip-btn {
+            background: #fff;
+            color: var(--blue);
+            border: 2px solid var(--blue);
+            padding: 13px 32px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .2s;
+        }
+        .tip-btn:hover {
+            background: var(--blue);
+            color: #fff;
+        }
+
         .speech-btn {
             background: var(--bg-light);
             color: var(--blue);
@@ -1290,6 +1307,17 @@
                 <p class="load-msg">⏳ 데이터를 불러오는 중입니다…</p>
             </div>
         </div>
+
+        <!-- 제보 버튼 -->
+        <div style="text-align:center; margin-top:32px;">
+            <button class="tip-btn" onclick="openTipModal()">
+                📢 찬성발언 뉴스를 알려주세요
+            </button>
+            <p style="font-size:0.82rem; color:#6B7280; margin-top:10px;">
+                의원의 1인1표 찬성 발언 언론 보도를 알고 계신다면 제보해주세요.<br>
+                검토 후 사이트에 반영됩니다.
+            </p>
+        </div>
     </div>
 </section>
 
@@ -1302,96 +1330,18 @@
             <p class="sec-desc">2020년 이후 주요 국회의원의 1인1표 찬성 발언 언론 기사 (최신순)</p>
         </div>
 
-        <div class="news-list">
-            <a class="news-item fade-in" href="https://www.fnnews.com/news/202606171014434974" target="_blank" rel="noopener">
-                <div class="news-src">파이낸셜뉴스</div>
-                <div class="news-body">
-                    <h4>정청래 "친청파·친석파 악의적 갈라치기…당원 1표제로 李정부 성공"</h4>
-                    <div class="news-date">2026.06.17 · 정청래</div>
-                </div>
-                <div class="news-arrow">→</div>
-            </a>
+        <!-- 시트 기반 뉴스 -->
+        <div class="news-list" id="news-list">
+            <p class="load-msg">⏳ 뉴스를 불러오는 중입니다…</p>
+        </div>
 
-            <a class="news-item fade-in" href="https://www.hankookilbo.com/news/article/A2026061609120004914" target="_blank" rel="noopener">
-                <div class="news-src">한국일보</div>
-                <div class="news-body">
-                    <h4>"당의 주인은 당원"··· 정청래, 1인 1표제 앞세워 연임 출사표</h4>
-                    <div class="news-date">2026.06.16 · 정청래</div>
-                </div>
-                <div class="news-arrow">→</div>
-            </a>
-
-            <a class="news-item fade-in" href="https://www.sisajournal.com/news/articleView.html?idxno=376583" target="_blank" rel="noopener">
-                <div class="news-src">시사저널</div>
-                <div class="news-body">
-                    <h4>정청래 "당 운영은 결국 당원이 하는 것"…1인1표제 재강조</h4>
-                    <div class="news-date">2026.06 · 정청래</div>
-                </div>
-                <div class="news-arrow">→</div>
-            </a>
-
-            <a class="news-item fade-in" href="https://www.kado.net/news/articleView.html?idxno=2026408" target="_blank" rel="noopener">
-                <div class="news-src">강원도민일보</div>
-                <div class="news-body">
-                    <h4>민주당 최고위원 보선 토론회…'1인1표'엔 공감, 당청 관계엔 온도차 (이성윤 발언)</h4>
-                    <div class="news-date">2026 · 이성윤</div>
-                </div>
-                <div class="news-arrow">→</div>
-            </a>
-
-            <a class="news-item fade-in" href="https://www.khan.co.kr/article/202601241902001" target="_blank" rel="noopener">
-                <div class="news-src">경향신문</div>
-                <div class="news-body">
-                    <h4>정청래표 '1인 1표제', 민주당 권리당원 찬성률 85.3%</h4>
-                    <div class="news-date">2026.01.24 · 정청래</div>
-                </div>
-                <div class="news-arrow">→</div>
-            </a>
-
-            <a class="news-item fade-in" href="https://www.hankookilbo.com/news/article/amp/A2026012313510002425" target="_blank" rel="noopener">
-                <div class="news-src">한국일보</div>
-                <div class="news-body">
-                    <h4>민주당 '1인 1표제' 권리당원 85% 찬성… 정청래 "압도적 다수 뜻 확인"</h4>
-                    <div class="news-date">2026.01.23 · 정청래</div>
-                </div>
-                <div class="news-arrow">→</div>
-            </a>
-
-            <a class="news-item fade-in" href="https://www.news1.kr/politics/assembly/6061041" target="_blank" rel="noopener">
-                <div class="news-src">뉴스1</div>
-                <div class="news-body">
-                    <h4>1인1표제 통과에 친청계 "환영"…문정복·이성윤·박수현 "당원주권 시대 열렸다"</h4>
-                    <div class="news-date">2026 · 문정복·이성윤·박수현</div>
-                </div>
-                <div class="news-arrow">→</div>
-            </a>
-
-            <a class="news-item fade-in" href="https://www.huffingtonpost.kr/article/257883" target="_blank" rel="noopener">
-                <div class="news-src">허프포스트</div>
-                <div class="news-body">
-                    <h4>'1인1표제'가 민주당의 새로운 전선으로 — 이성윤 "당원 주권 원리를 당 안에서 실현"</h4>
-                    <div class="news-date">2025 · 이성윤</div>
-                </div>
-                <div class="news-arrow">→</div>
-            </a>
-
-            <a class="news-item fade-in" href="http://www.newstomato.com/ReadNews.aspx?no=1304109" target="_blank" rel="noopener">
-                <div class="news-src">뉴스토마토</div>
-                <div class="news-body">
-                    <h4>정청래 "1인1표 위해 수많은 피 흘려…당 주인은 당원"</h4>
-                    <div class="news-date">2025 · 정청래</div>
-                </div>
-                <div class="news-arrow">→</div>
-            </a>
-
-            <a class="news-item fade-in" href="https://www.khan.co.kr/article/202511202009001" target="_blank" rel="noopener">
-                <div class="news-src">경향신문</div>
-                <div class="news-body">
-                    <h4>민주당 대의원·권리당원 '1인1표제' 전당원 투표에 87% 찬성</h4>
-                    <div class="news-date">2025.11.20</div>
-                </div>
-                <div class="news-arrow">→</div>
-            </a>
+        <!-- 제보된 뉴스 (승인된 것만) -->
+        <div id="tip-news-wrap" style="display:none;">
+            <div class="sec-head" style="margin-top:32px; padding-top:28px; border-top:1px solid var(--border);">
+                <div class="sec-badge">💬 제보 뉴스</div>
+                <p class="sec-desc" style="font-size:0.85rem;">당원들이 제보해주신 언론 보도입니다</p>
+            </div>
+            <div class="news-list" id="tip-news-list"></div>
         </div>
     </div>
 </section>
@@ -1460,6 +1410,45 @@
             </div>
             <button type="submit" class="btn-submit" id="submitBtn">서명 제출하기</button>
             <div id="submitMsg" class="submit-msg"></div>
+        </form>
+    </div>
+</div>
+
+<!-- ═══ 제보 모달 ═══ -->
+<div id="tipModal" class="join-modal-overlay" onclick="handleTipOverlayClick(event)">
+    <div class="join-modal-box">
+        <button class="modal-close" onclick="closeTipModal()" aria-label="닫기">✕</button>
+        <h3>📢 찬성발언 뉴스 제보</h3>
+        <p class="modal-sub">의원의 1인1표 찬성 발언 언론 보도를 알려주세요.<br>검토 후 사이트에 반영됩니다.</p>
+
+        <form id="tipForm" onsubmit="submitTip(event)" novalidate>
+            <div class="form-group">
+                <label for="t-name">의원 이름 <span class="req">*</span></label>
+                <input type="text" id="t-name" placeholder="홍길동" required maxlength="20">
+            </div>
+            <div class="form-group">
+                <label for="t-district">지역구 <span class="req">*</span></label>
+                <input type="text" id="t-district" placeholder="예: 서울 종로구" required maxlength="30">
+            </div>
+            <div class="form-group">
+                <label for="t-content">발언 내용 <span class="req">*</span></label>
+                <textarea id="t-content" placeholder="의원이 한 발언 내용을 입력해주세요" required maxlength="500" rows="3" oninput="updateTipCharCount(this)"></textarea>
+                <div class="char-count"><span id="tipLen">0</span>/500</div>
+            </div>
+            <div class="form-group">
+                <label for="t-link">발언 링크 <span class="req">*</span></label>
+                <input type="url" id="t-link" placeholder="https://www.example.com/article" required maxlength="500">
+            </div>
+            <div class="form-group">
+                <label for="t-source">언론사 <span class="req">*</span></label>
+                <input type="text" id="t-source" placeholder="예: 경향신문" required maxlength="50">
+            </div>
+            <div class="form-group">
+                <label for="t-date">발언 날짜</label>
+                <input type="text" id="t-date" placeholder="예: 2026.06.17" maxlength="20">
+            </div>
+            <button type="submit" class="btn-submit" id="tipSubmitBtn">제보 제출하기</button>
+            <div id="tipSubmitMsg" class="submit-msg"></div>
         </form>
     </div>
 </div>
@@ -1647,6 +1636,9 @@
             renderGrid('grid-supreme', 'cnt-supreme', supreme, '후보 확정 후 업데이트됩니다');
             renderGrid('grid-general', 'cnt-general', general, '데이터를 입력해주세요');
 
+            // 뉴스 섹션 자동 렌더링
+            loadNews(all);
+
         } catch (err) {
             console.warn('시트 로드 실패 — 시트가 웹에 게시되었는지 확인하세요:', err);
             ['grid-leader','grid-supreme','grid-general'].forEach(id => {
@@ -1660,6 +1652,160 @@
     }
 
     loadMembers();
+
+    /* ══════════════════════════════════════
+       뉴스 자동 렌더링 (시트 발언링크 기반)
+    ══════════════════════════════════════ */
+    function loadNews(allMembers) {
+        const newsItems = [];
+        allMembers.forEach(m => {
+            m.speeches.forEach(s => {
+                if (s.link) {
+                    newsItems.push({
+                        name: m.name,
+                        content: s.content,
+                        link: s.link,
+                        source: s.source || '언론',
+                        date: s.date || ''
+                    });
+                }
+            });
+        });
+
+        // 날짜 내림차순 정렬 (날짜 없으면 맨 아래)
+        newsItems.sort((a, b) => {
+            if (!a.date && !b.date) return 0;
+            if (!a.date) return 1;
+            if (!b.date) return -1;
+            return b.date.localeCompare(a.date);
+        });
+
+        const el = document.getElementById('news-list');
+        if (newsItems.length === 0) {
+            el.innerHTML = '<p class="load-msg">📋 발언 링크가 등록된 데이터가 없습니다.</p>';
+            return;
+        }
+        el.innerHTML = newsItems.map(n => `
+            <a class="news-item fade-in" href="${n.link}" target="_blank" rel="noopener">
+                <div class="news-src">${escHtml(n.source)}</div>
+                <div class="news-body">
+                    <h4>${escHtml(n.content)}</h4>
+                    <div class="news-date">${n.date ? escHtml(n.date) + ' · ' : ''}${escHtml(n.name)}</div>
+                </div>
+                <div class="news-arrow">→</div>
+            </a>
+        `).join('');
+        el.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    }
+
+    function escHtml(str) {
+        if (!str) return '';
+        return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    /* ══════════════════════════════════════
+       승인된 제보 뉴스 로드
+    ══════════════════════════════════════ */
+    async function loadTips() {
+        try {
+            const url = APPS_SCRIPT_URL + '?action=tips&_t=' + Date.now();
+            const res = await fetch(url);
+            const json = await res.json();
+            if (json.error || !json.tips || json.tips.length === 0) return;
+
+            const wrap = document.getElementById('tip-news-wrap');
+            const list = document.getElementById('tip-news-list');
+            wrap.style.display = 'block';
+            list.innerHTML = json.tips.map(t => `
+                <a class="news-item fade-in" href="${escHtml(t.link)}" target="_blank" rel="noopener">
+                    <div class="news-src">${escHtml(t.source)}</div>
+                    <div class="news-body">
+                        <h4>${escHtml(t.content)}</h4>
+                        <div class="news-date">${t.date ? escHtml(t.date) + ' · ' : ''}${escHtml(t.name)} (${escHtml(t.district)})</div>
+                    </div>
+                    <div class="news-arrow">→</div>
+                </a>
+            `).join('');
+            list.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        } catch(e) {
+            console.warn('[loadTips] 실패:', e);
+        }
+    }
+
+    loadTips();
+
+    /* ══════════════════════════════════════
+       제보 모달
+    ══════════════════════════════════════ */
+    function openTipModal() {
+        document.getElementById('tipModal').classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeTipModal() {
+        document.getElementById('tipModal').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+    function handleTipOverlayClick(e) {
+        if (e.target === document.getElementById('tipModal')) closeTipModal();
+    }
+    function updateTipCharCount(el) {
+        document.getElementById('tipLen').textContent = el.value.length;
+    }
+
+    async function submitTip(e) {
+        e.preventDefault();
+        const btn = document.getElementById('tipSubmitBtn');
+        const msg = document.getElementById('tipSubmitMsg');
+
+        const name     = document.getElementById('t-name').value.trim();
+        const district = document.getElementById('t-district').value.trim();
+        const content  = document.getElementById('t-content').value.trim();
+        const link     = document.getElementById('t-link').value.trim();
+        const source   = document.getElementById('t-source').value.trim();
+        const date     = document.getElementById('t-date').value.trim();
+
+        if (!name || !district || !content || !link || !source) {
+            msg.textContent = '필수 항목을 모두 입력해주세요.';
+            msg.style.color = '#EF4444';
+            return;
+        }
+        // URL 간단 검증
+        if (!/^https?:\/\/.+/.test(link)) {
+            msg.textContent = '발언 링크는 http(s)://로 시작해야 합니다.';
+            msg.style.color = '#EF4444';
+            return;
+        }
+
+        btn.disabled = true;
+        btn.textContent = '제출 중…';
+        msg.textContent = '';
+
+        try {
+            const body = JSON.stringify({ action:'addTip', name, district, content, link, source, date });
+            const res  = await fetch(APPS_SCRIPT_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body
+            });
+            const json = await res.json();
+            if (json.result === 'ok') {
+                msg.textContent = '✅ 제보해주셔서 감사합니다! 검토 후 사이트에 반영됩니다.';
+                msg.style.color = '#10B981';
+                document.getElementById('tipForm').reset();
+                document.getElementById('tipLen').textContent = '0';
+                setTimeout(closeTipModal, 2500);
+            } else {
+                throw new Error(json.error || '서버 오류');
+            }
+        } catch(err) {
+            msg.textContent = '오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
+            msg.style.color = '#EF4444';
+            console.error('[submitTip]', err);
+        } finally {
+            btn.disabled = false;
+            btn.textContent = '제보 제출하기';
+        }
+    }
 
     /* ══════════════════════════════════════
        동참 서명 기능
@@ -1924,10 +2070,3 @@
             msgEl.className = 'submit-msg ' + type;
             msgEl.textContent = text;
         }
-    }
-
-    // 초기 로드
-    loadSupporters();
-</script>
-</body>
-</html>
