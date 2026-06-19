@@ -1588,12 +1588,12 @@
     async function loadMembers() {
         try {
             /* Apps Script 프록시 경유 (CORS 리다이렉트 우회) */
-            const proxyUrl = 'https://script.google.com/macros/s/AKfycbwyRIE7FriQmBWCcItwVUn4nBOvvXLQCKJ5i4o1-2v29-np72Rx5BoiJRt1Aai4iBog0Q/exec' + '?action=members&_t=' + Date.now();
+            const proxyUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTK_Wf4cYH0nOAQv1NYQmLAgZEpeWjayn1FIjnAVd7hLthplCMoWJ-RJMQ5d9-LXc2-yYdn7OAjU76l/pub?output=csv&_t=' + Date.now();
             let text;
             try {
                 const res = await fetch(proxyUrl);
-                const json = await res.json();
-                if (json.error) throw new Error(json.error);
+                const json = { csv: await res.text() };
+                
                 text = json.csv;
             } catch(proxyErr) {
                 /* 프록시 실패 시 직접 fetch 시도 */
