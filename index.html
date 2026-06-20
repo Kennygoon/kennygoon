@@ -1602,7 +1602,7 @@
             <div class="avatar">${avatarInner}</div>
             <div class="m-name">${m.name}</div>
             <div class="m-district">${m.district}</div>
-            <div class="m-term">${m.term}${m.role ? ' · ' + m.role : ''}</div>
+            <div class="m-term">${(m.term && m.term !== 'undefined') ? m.term : ''}${(m.role && m.role !== 'undefined') ? ((m.term && m.term !== 'undefined') ? ' · ' : '') + m.role : ''}</div>
             ${badge}
             <div class="m-speeches ${speechClass}">${speechLabel}</div>
             <button class="speech-btn" onclick="toggleSpeech(this)">발언 보기 ▼</button>
