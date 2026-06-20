@@ -1782,21 +1782,18 @@
 
         try {
             const body = JSON.stringify({ action:'addTip', name, district, content, link, source, date });
-            const res  = await fetch(APPS_SCRIPT_URL, {
+            await fetch(APPS_SCRIPT_URL, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body
+                headers: { 'Content-Type': 'text/plain' },
+                body,
+                mode: 'no-cors'
             });
-            const json = await res.json();
-            if (json.result === 'ok') {
-                msg.textContent = '✅ 제보해주셔서 감사합니다! 검토 후 사이트에 반영됩니다.';
-                msg.style.color = '#10B981';
-                document.getElementById('tipForm').reset();
-                document.getElementById('tipLen').textContent = '0';
-                setTimeout(closeTipModal, 2500);
-            } else {
-                throw new Error(json.error || '서버 오류');
-            }
+            // no-cors → opaque 응답, 전송 성공으로 처리
+            msg.textContent = '✅ 제보해주셔서 감사합니다! 검토 후 사이트에 반영됩니다.';
+            msg.style.color = '#10B981';
+            document.getElementById('tipForm').reset();
+            document.getElementById('tipLen').textContent = '0';
+            setTimeout(closeTipModal, 2500);
         } catch(err) {
             msg.textContent = '오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
             msg.style.color = '#EF4444';
