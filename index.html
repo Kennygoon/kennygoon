@@ -1944,8 +1944,8 @@
             if (pctEl) pctEl.textContent = pct;
 
             const messages = rows
-                .filter(r => r['응원메시지'] && r['이름'])
-                .map(r => ({ name: r['이름'], msg: r['응원메시지'] }));
+                .filter(r => (r['응원 메시지'] || r['응원메시지']) && r['이름'])
+                .map(r => ({ name: r['이름'], msg: r['응원 메시지'] || r['응원메시지'] }));
             startTicker(messages);
 
         } catch(err) {
