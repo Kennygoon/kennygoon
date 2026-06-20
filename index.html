@@ -1398,15 +1398,11 @@
                 <div class="char-count"><span id="msgLen">0</span>/150</div>
             </div>
             <div class="form-group">
-                <label for="f-phone">휴대폰 번호 <span class="req">*</span></label>
-                <input type="tel" id="f-phone" placeholder="010-0000-0000" required maxlength="13" oninput="formatPhone(this)">
-            </div>
-            <div class="form-group">
                 <div class="checkbox-wrap">
                     <input type="checkbox" id="f-consent" required>
                     <label for="f-consent">개인정보 수집·이용에 동의합니다 <span class="req">*</span></label>
                 </div>
-                <div class="consent-detail">수집항목: 이름, 전화번호 &nbsp;|&nbsp; 목적: 운동 참여 확인 &nbsp;|&nbsp; 보유기간: 운동 종료 시까지</div>
+                <div class="consent-detail">수집항목: 이름, 응원 메시지 &nbsp;|&nbsp; 목적: 운동 참여 확인 &nbsp;|&nbsp; 보유기간: 운동 종료 시까지</div>
             </div>
             <button type="submit" class="btn-submit" id="submitBtn">서명 제출하기</button>
             <div id="submitMsg" class="submit-msg"></div>
@@ -1995,21 +1991,15 @@
         const name    = document.getElementById('f-name').value.trim();
         const agree   = document.querySelector('input[name="f-agree"]:checked')?.value || '';
         const message = document.getElementById('f-message').value.trim();
-        const phone   = document.getElementById('f-phone').value.trim();
         const consent = document.getElementById('f-consent').checked;
 
-        if (!name || !agree || !message || !phone || !consent) {
+        if (!name || !agree || !message || !consent) {
             msg.textContent = '필수 항목을 모두 입력/선택해주세요.';
             msg.style.color = '#EF4444';
             return;
         }
         if (!isValidName(name)) {
             msg.textContent = '이름을 바르게 입력해주세요 (2자 이상 한글/영문).';
-            msg.style.color = '#EF4444';
-            return;
-        }
-        if (!isValidPhone(phone)) {
-            msg.textContent = '올바른 휴대폰 번호를 입력해주세요.';
             msg.style.color = '#EF4444';
             return;
         }
@@ -2024,7 +2014,7 @@
         msg.textContent = '';
 
         try {
-            const body = JSON.stringify({ action:'addRow', name, agree, message, phone });
+            const body = JSON.stringify({ action:'addRow', name, agree, message });
             await fetch(APPS_SCRIPT_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'text/plain' },
