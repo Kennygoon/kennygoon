@@ -886,7 +886,45 @@
             box-shadow: 0 10px 36px rgba(0,154,78,0.55);
         }
         /* 히어로 아래 참여 카운터 + 롤링 메시지 섹션 */
-        .ticker-hero-section {
+        /* 이재명 사진 + 인용 */
+        .lee-quote-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            align-items: center;
+            max-width: 640px;
+            width: 100%;
+            margin-bottom: 28px;
+        }
+        .lee-photo-wrap { display: flex; justify-content: center; }
+        .lee-photo {
+            width: 100%;
+            max-width: 260px;
+            border-radius: 16px;
+            object-fit: cover;
+            display: block;
+            filter: drop-shadow(0 4px 24px rgba(0,0,0,0.4));
+        }
+        .lee-quote-card {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 14px;
+            padding: 22px 20px;
+        }
+        .lee-quote-mark { color: rgba(126,204,239,0.7); font-size: 48px; line-height: 1; font-family: Georgia, serif; margin-bottom: 6px; }
+        .lee-quote-text { color: #ffffff; font-size: 1.4rem; font-weight: 900; line-height: 1.35; margin: 0 0 14px; letter-spacing: -0.5px; }
+        .lee-quote-line { width: 32px; height: 2px; background: #7ECCEF; margin-bottom: 12px; border-radius: 2px; }
+        .lee-quote-who { color: rgba(255,255,255,0.65); font-size: 0.82rem; margin: 0 0 10px; font-weight: 600; }
+        .lee-quote-tags { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .lee-tag { background: rgba(126,204,239,0.15); border: 1px solid rgba(126,204,239,0.3); color: #7ECCEF; font-size: 0.72rem; padding: 3px 10px; border-radius: 20px; font-weight: 600; }
+        .lee-date { color: rgba(255,255,255,0.45); font-size: 0.72rem; }
+        .lee-divider { width: 100%; max-width: 560px; height: 1px; background: rgba(255,255,255,0.1); margin-bottom: 28px; }
+        @media (max-width: 640px) {
+            .lee-quote-row { grid-template-columns: 1fr; gap: 20px; }
+            .lee-photo { max-width: 200px; margin: 0 auto; }
+        }
+
+                .ticker-hero-section {
             background: linear-gradient(180deg, #0d2a6b 0%, #0a3d7c 100%);
             padding: 36px 20px 44px;
             width: 100%;
@@ -1137,7 +1175,26 @@
 
 <!-- ═══ 참여 카운터 + 응원 메시지 롤링 ═══ -->
 <section class="ticker-hero-section">
-    <!-- 참여자 수 카운터 -->
+
+    <!-- 이재명 사진 + 뉴스 인용 -->
+    <div class="lee-quote-row">
+        <div class="lee-photo-wrap">
+            <img src="lee.png" alt="이재명 대표" class="lee-photo">
+        </div>
+        <div class="lee-quote-card">
+            <div class="lee-quote-mark">"</div>
+            <p class="lee-quote-text">대의원도<br>1인 1표</p>
+            <div class="lee-quote-line"></div>
+            <p class="lee-quote-who">이재명 대표</p>
+            <div class="lee-quote-tags">
+                <span class="lee-tag">채널A 뉴스</span>
+                <span class="lee-date">2023-11-27</span>
+            </div>
+        </div>
+    </div>
+    <div class="lee-divider"></div>
+
+        <!-- 참여자 수 카운터 -->
     <div class="supporter-count-box">
         <div class="supporter-num" id="supporterCount">—</div>
         <div class="supporter-label">명이 찬성 동참했습니다</div>
