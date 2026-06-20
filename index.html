@@ -1641,7 +1641,7 @@
                 const res2 = await fetch(CSV_URL);
                 text = await res2.text();
             }
-            const data = parseCSV(text).filter(r => r['이름']);
+            const data = parseCSV(text).filter(r => r['이름'] && r['확인완료'] === '완료');
             if (data.length < 1) {
                 ['grid-leader','grid-supreme','grid-general'].forEach(id => {
                     document.getElementById(id).innerHTML =
