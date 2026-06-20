@@ -2028,22 +2028,19 @@
 
         try {
             const body = JSON.stringify({ action:'addRow', name, agree, message, phone });
-            const res  = await fetch(APPS_SCRIPT_URL, {
+            await fetch(APPS_SCRIPT_URL, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body
+                headers: { 'Content-Type': 'text/plain' },
+                body,
+                mode: 'no-cors'
             });
-            const json = await res.json();
-            if (json.result === 'ok') {
-                msg.textContent = '✅ 동참해주셔서 감사합니다!';
-                msg.style.color = '#10B981';
-                document.getElementById('joinForm').reset();
-                document.getElementById('msgLen').textContent = '0';
-                setTimeout(closeJoinModal, 2200);
-                loadSupporters();
-            } else {
-                throw new Error(json.error || '서버 오류');
-            }
+            // no-cors는 opaque 응답 → 전송 성공으로 처리
+            msg.textContent = '✅ 동참해주셔서 감사합니다!';
+            msg.style.color = '#10B981';
+            document.getElementById('joinForm').reset();
+            document.getElementById('msgLen').textContent = '0';
+            setTimeout(closeJoinModal, 2200);
+            loadSupporters();
         } catch(err) {
             msg.textContent = '오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
             msg.style.color = '#EF4444';
@@ -2057,133 +2054,3 @@
 </script>
 </body>
 </html>
-  const bar = document.getElementById('goalBar');
-            if (bar) setTimeout(() => { bar.style.width = pct + '%'; }, 100);
-            const pctEl = document.getElementById('goalPct');
-            if (pctEl) pctEl.textContent = pct;
-
-            const msgs = rows
-                .map(r => {
-                    // 헤더명 공백 무관하게 동적 탐색
-                    const nameKey = Object.keys(r).find(k => k.trim() === '이름');
-                    const msgKey  = Object.keys(r).find(k => k.replace(/\s/g,'') === '응원메시지');
-                    const name = (nameKey ? r[nameKey] : '') || '';
-                    const msg  = (msgKey  ? r[msgKey]  : '') || '동참합니다!';
-                    return { name, msg };
-                })
-                .filter(m => m.name && m.name.trim());
-            console.log('[DEBUG] msgs 개수:', msgs.length);
-            const finalMsgs = msgs.reverse().slice(0, 80);
-
-            startTicker(finalMsgs);
-        } catch (e) {
-            console.error('[DEBUG] loadSupporters 에러:', e);
-            const el = document.getElementById('supporterCount');
-            if (el) el.textContent = '?';
-            startTicker([]);
-        }
-    }
-
-    // 모달 열기/닫기
-    function openJoinModal() {
-        document.getElementById('joinModal').classList.add('active');
-        document.body.style.overflow = 'hidden';
-        document.getElementById('submitMsg').textContent = '';
-        document.getElementById('submitMsg').className = 'submit-msg';
-    }
-    function closeJoinModal() {
-        document.getElementById('joinModal').classList.remove('active');
-        document.body.style.overflow = '';
-    }
-    function handleOverlayClick(e) {
-        if (e.target.id === 'joinModal') closeJoinModal();
-    }
-
-    // 전화번호 자동 하이픈
-    function formatPhone(el) {
-        let v = el.value.replace(/\D/g, '').slice(0, 11);
-        if (v.length >= 8) v = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7);
-        else if (v.length >= 4) v = v.slice(0,3) + '-' + v.slice(3);
-        el.value = v;
-    }
-
-    // 글자 수 카운트
-    function updateCharCount(el) {
-        document.getElementById('msgLen').textContent = el.value.length;
-    }
-
-    // 폼 제출
-    async function submitJoin(e) {
-        e.preventDefault();
-        const msgEl   = document.getElementById('submitMsg');
-        const btn     = document.getElementById('submitBtn');
-
-        const name    = document.getElementById('f-name').value.trim();
-        const agree   = document.querySelector('input[name="f-agree"]:checked')?.value || '';
-        const message = document.getElementById('f-message').value.trim();
-        const phone   = document.getElementById('f-phone').value.trim();
-        const consent = document.getElementById('f-consent').checked;
-
-        // 유효성 검사
-        if (!name)    { showMsg('error', '이름을 입력해주세요.'); return; }
-        if (!isValidName(name)) {
-            showMsg('error', '이름을 올바르게 입력해주세요. (완전한 한글 2자 이상, 자음/모음 단독 불가)');
-            return;
-        }
-        if (!agree)   { showMsg('error', '찬성여부를 선택해주세요.'); return; }
-        if (!message) { showMsg('error', '응원 메시지를 입력해주세요.'); return; }
-        if (hasNegativeContent(message)) {
-            showMsg('error', '응원 메시지에 욕설 또는 비속어가 포함되어 있습니다. 수정 후 다시 시도해주세요.');
-            return;
-        }
-        if (!phone || !isValidPhone(phone)) {
-            showMsg('error', '올바른 휴대폰 번호를 입력해주세요. (실제 번호로 입력해주세요)');
-            return;
-        }
-        if (!consent) { showMsg('error', '개인정보 수집·이용에 동의해주세요.'); return; }
-
-        btn.disabled = true;
-        btn.textContent = '제출 중...';
-        msgEl.textContent = '';
-
-        const now = new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
-        const payload = {
-            입력일시: now,
-            이름: name,
-            찬성여부: agree,
-            응원메시지: message,
-            휴대폰번호: phone,
-            개인정보활용동의: '동의'
-        };
-
-        if (APPS_SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL_HERE') {
-            // 아직 미설정 → UI 동작 확인용 성공 처리
-            await new Promise(r => setTimeout(r, 800));
-            onSubmitSuccess();
-        } else {
-            try {
-                await fetch(APPS_SCRIPT_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'text/plain' },
-                    body: JSON.stringify(payload),
-                    mode: 'no-cors'  // opaque response — 전송은 정상 처리됨
-                });
-                onSubmitSuccess();
-            } catch (err) {
-                showMsg('error', '전송 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
-            }
-        }
-
-        btn.disabled = false;
-        btn.textContent = '서명 제출하기';
-
-        function onSubmitSuccess() {
-            showMsg('success', '✅ 동참 서명이 완료되었습니다! 감사합니다.');
-            document.getElementById('joinForm').reset();
-            document.getElementById('msgLen').textContent = '0';
-            setTimeout(() => { closeJoinModal(); loadSupporters(); }, 2200);
-        }
-        function showMsg(type, text) {
-            msgEl.className = 'submit-msg ' + type;
-            msgEl.textContent = text;
-        }
